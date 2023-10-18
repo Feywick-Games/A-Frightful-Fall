@@ -1,0 +1,66 @@
+[gd_scene load_steps=14 format=3 uid="uid://dwa6pib61kxmd"]
+
+[ext_resource type="Script" path="res://Stage/_Script/grid.gd" id="1_tdw1m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhwbs"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.282353, 0.227451, 0.780392, 0.290196)
+
+[sub_resource type="QuadMesh" id="QuadMesh_jcltq"]
+material = SubResource("StandardMaterial3D_jhwbs")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cr11o"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.227451, 0.780392, 0.235294, 0.290196)
+
+[sub_resource type="QuadMesh" id="QuadMesh_44e1s"]
+material = SubResource("StandardMaterial3D_cr11o")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hila"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.619608, 0, 0, 0.290196)
+
+[sub_resource type="QuadMesh" id="QuadMesh_0yixr"]
+material = SubResource("StandardMaterial3D_0hila")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_il8ft"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.0313726, 0.352941, 0.611765, 0.290196)
+
+[sub_resource type="QuadMesh" id="QuadMesh_sgo2n"]
+material = SubResource("StandardMaterial3D_il8ft")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6dfw"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.329412, 0.372549, 0.00784314, 0.290196)
+
+[sub_resource type="QuadMesh" id="QuadMesh_v778e"]
+material = SubResource("StandardMaterial3D_v6dfw")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu58t"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.596078, 0.0235294, 0.47451, 0.290196)
+
+[sub_resource type="QuadMesh" id="QuadMesh_0css1"]
+material = SubResource("StandardMaterial3D_uu58t")
+orientation = 1
+
+[node name="Grid" type="Node3D"]
+script = ExtResource("1_tdw1m")
+_move_mesh = SubResource("QuadMesh_jcltq")
+_action_mesh = SubResource("QuadMesh_44e1s")
+_empty_mesh = SubResource("QuadMesh_0yixr")
+_move_select_mesh = SubResource("QuadMesh_sgo2n")
+_action_select_mesh = SubResource("QuadMesh_v778e")
+_empty_select_mesh = SubResource("QuadMesh_0css1")

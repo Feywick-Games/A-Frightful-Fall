@@ -19,6 +19,13 @@ func _on_encounter_ended() -> void:
 	_unit_registry.clear()
 
 
+# could return special props/items in the future
+func get_tile_occupant(tile_id : int) -> Unit:
+	if tile_id in _unit_registry:
+		return _unit_registry[tile_id]
+	return null
+
+
 func _add_neighborhood(neighborhood : Neighborhood) -> void:
 	var floor_boxes : Array[AABB] = neighborhood.get_floor_bounding_boxes()
 	var props : Array[Prop] = neighborhood.get_props()
@@ -70,18 +77,24 @@ func register_tile(unit : Unit, old_index : int) -> void:
 func get_tile_position(id : int) -> Vector3:
 	return _graph.get_point_position(id)
 
+func get_tile_id(position : Vector3) -> int:
+	return _graph.get_closest_point(position)
 
-func _toggle_tiles(is_ally : bool) -> void:
+
+func _toggle_tiles(all : bool, is_ally := true) -> void:
 	for id in _unit_registry.keys():
 		var unit : Unit = _unit_registry[id]
-		if unit is Ally:
-			_graph.set_point_disabled(id, !is_ally)
-		if unit is Enemy:
-			_graph.set_point_disabled(id, is_ally)
+		if not all:
+			if unit is Ally:
+				_graph.set_point_disabled(id, !is_ally)
+			if unit is Enemy:
+				_graph.set_point_disabled(id, is_ally)
+		else:
+			_graph.set_point_disabled(id, false)
 
 
-func get_range_ids(start_index : int, distance : int, is_ally : bool) -> Array[int]:
-	_toggle_tiles(is_ally)
+func get_range_ids(start_index : int, distance : int, is_ally : bool, toggle_all:= false) -> Array[int]:
+	_toggle_tiles(toggle_all, is_ally)
 	var output : Array[int] = []
 	var start_pos : Vector3 = _graph.get_point_position(start_index)
 	print(start_pos)
@@ -89,6 +102,9 @@ func get_range_ids(start_index : int, distance : int, is_ally : bool) -> Array[i
 	for z in range(start_pos.z - distance, start_pos.z + distance + 1):
 		for x in range(start_pos.x - zi, start_pos.x + zi + 1):
 			var point_id : int = _graph.get_closest_point(Vector3(x,0,z), true)
+			
+			if point_id in output:
+				continue
 			
 			if _graph.is_point_disabled(point_id):
 				print("disabled")
@@ -102,12 +118,12 @@ func get_range_ids(start_index : int, distance : int, is_ally : bool) -> Array[i
 		else:
 			zi -= 1
 		
-	_toggle_tiles(!is_ally)
+	_toggle_tiles(true)
 	return output
 
 
-func _manhattan_dist(start:Vector3, end:Vector3) -> float:
-	return abs(end.x - start.x) + abs(end.y - start.y)
+func has_occupant(id : int) -> bool:
+	return id in _unit_registry
 
 
 #func _depth_search(source_id : int, depth : int, con_id : int = -1, output =[]) -> Array[int]:

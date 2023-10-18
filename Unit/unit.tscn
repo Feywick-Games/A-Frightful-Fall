@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmxeriyuu5it6"]
+
+[ext_resource type="Script" path="res://Unit/_Script/unit.gd" id="1_tysk5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_k05lm"]
+
+[node name="Unit" type="CharacterBody3D"]
+script = ExtResource("1_tysk5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_k05lm")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
