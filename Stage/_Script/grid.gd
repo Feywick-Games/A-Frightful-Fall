@@ -53,7 +53,7 @@ func _on_range_requested(movement_ids : Array[int], range_ids : Array[int]) -> v
 		elif Graph.get_tile_occupant(id) == GameState.active_unit:
 			active_tile = id
 	
-	for id in movement_ids + range_ids:
+	for id in _movement_range + _action_range + _empty_range:
 		var mesh_instance := MeshInstance3D.new()
 		if id == active_tile:
 			mesh_instance.mesh = _move_select_mesh
@@ -78,7 +78,6 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_pressed("move"):
 				direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 			if direction:
-				print(_cur_tile_idx)
 				var nearest_tile = Graph.get_tile_id(
 					_selection_node.global_position + Vector3(direction.x, 0, direction.y)
 				)
