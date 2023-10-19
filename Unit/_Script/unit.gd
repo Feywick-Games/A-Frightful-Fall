@@ -1,12 +1,9 @@
 class_name Unit
 extends CharacterBody3D
 
-@export_range(1,16)
-var speed : float
 @export
-var movement : int
-@export
-var reach : int
+var stats : StatBlock = StatBlock.new()
+
 var tile_index : int
 var is_ally : bool
 
@@ -20,4 +17,6 @@ func _on_encounter_started(_group : String) -> void:
 
 
 func start_turn() -> void:
-	var rng : Array[int] = Graph.get_range_ids(tile_index, movement, is_ally)
+	var move_rng = Graph.get_range_ids(tile_index,stats.movement,true)
+	var all_rng = Graph.get_range_ids(tile_index,stats.movement + stats.reach,true, true)
+	EventBus.range_requested.emit(tile_index,stats,is_ally)

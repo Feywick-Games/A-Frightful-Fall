@@ -10,15 +10,42 @@ config_version=5
 
 [application]
 
-config/name="A Frightful Fall"
+config/name="Lulu Is Afraid of the Dark"
 run/main_scene="res://Stage/stage.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
+config/icon="res://Meta/icon.png"
 
 [autoload]
 
 EventBus="*res://Autoload/event_bus.gd"
 GameState="*res://Autoload/game_state.gd"
 Graph="*res://Autoload/graph.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
+
+[importer_defaults]
+
+texture={
+"compress/channel_pack": 0,
+"compress/hdr_compression": 1,
+"compress/high_quality": false,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/normal_map": 0,
+"detect_3d/compress_to": 0,
+"mipmaps/generate": true,
+"mipmaps/limit": -1,
+"process/fix_alpha_border": true,
+"process/hdr_as_srgb": false,
+"process/hdr_clamp_exposure": false,
+"process/normal_map_invert_y": false,
+"process/premult_alpha": false,
+"process/size_limit": 0,
+"roughness/mode": 0,
+"roughness/src_normal": ""
+}
 
 [input]
 

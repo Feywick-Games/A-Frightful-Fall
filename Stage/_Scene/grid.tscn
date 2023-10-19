@@ -2,22 +2,22 @@
 
 [ext_resource type="Script" path="res://Stage/_Script/grid.gd" id="1_tdw1m"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhwbs"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rl14a"]
 transparency = 1
 shading_mode = 0
-albedo_color = Color(0.282353, 0.227451, 0.780392, 0.290196)
-
-[sub_resource type="QuadMesh" id="QuadMesh_jcltq"]
-material = SubResource("StandardMaterial3D_jhwbs")
-orientation = 1
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cr11o"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.227451, 0.780392, 0.235294, 0.290196)
+albedo_color = Color(0.501961, 0.388235, 1, 0.290196)
 
 [sub_resource type="QuadMesh" id="QuadMesh_44e1s"]
-material = SubResource("StandardMaterial3D_cr11o")
+material = SubResource("StandardMaterial3D_rl14a")
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xaown"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.388235, 1, 0.419608, 0.290196)
+
+[sub_resource type="QuadMesh" id="QuadMesh_43dkm"]
+material = SubResource("StandardMaterial3D_xaown")
 orientation = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hila"]
@@ -58,8 +58,8 @@ orientation = 1
 
 [node name="Grid" type="Node3D"]
 script = ExtResource("1_tdw1m")
-_move_mesh = SubResource("QuadMesh_jcltq")
-_action_mesh = SubResource("QuadMesh_44e1s")
+_move_mesh = SubResource("QuadMesh_44e1s")
+_action_mesh = SubResource("QuadMesh_43dkm")
 _empty_mesh = SubResource("QuadMesh_0yixr")
 _move_select_mesh = SubResource("QuadMesh_sgo2n")
 _action_select_mesh = SubResource("QuadMesh_v778e")

@@ -1,42 +1,86 @@
-[gd_scene load_steps=22 format=3 uid="uid://bokvcqgh4fe61"]
+[gd_scene load_steps=28 format=3 uid="uid://cxkk4wfsjfuut"]
 
 [ext_resource type="Script" path="res://Stage/_Script/clock.gd" id="1_pvpci"]
 [ext_resource type="PackedScene" uid="uid://dwa6pib61kxmd" path="res://Stage/_Scene/grid.tscn" id="2_k5lxv"]
 [ext_resource type="Script" path="res://Stage/_Script/neighborhood.gd" id="2_y3l82"]
-[ext_resource type="Script" path="res://Unit/Enemy/_Script/enemy.gd" id="3_qkl7h"]
-[ext_resource type="Script" path="res://Unit/Ally/_Script/ally.gd" id="4_8m5va"]
 [ext_resource type="Script" path="res://Stage/_Script/prop.gd" id="5_tb50n"]
+[ext_resource type="PackedScene" uid="uid://76j45ew8hl5v" path="res://Unit/Ally/_Scene/lucy.tscn" id="5_yg0bw"]
 [ext_resource type="Script" path="res://Stage/_Script/game_camera.gd" id="6_m1i4b"]
+[ext_resource type="Script" path="res://Unit/Enemy/_Script/enemy.gd" id="7_whwhn"]
+[ext_resource type="Script" path="res://Unit/_Script/stat_block.gd" id="8_64iu4"]
+[ext_resource type="Texture2D" uid="uid://ducr4vlggsnbf" path="res://Unit/Enemy/_Sprite/wisp.png" id="8_ybksn"]
+[ext_resource type="Script" path="res://UI/_Script/status_panel.gd" id="9_efe0l"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_palwg"]
-sky_top_color = Color(0.980392, 0.74902, 0.458824, 1)
-sky_horizon_color = Color(0.745098, 0.687255, 0.614706, 1)
-ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0.745098, 0.687255, 0.614706, 1)
 
 [sub_resource type="Sky" id="Sky_4jbvm"]
 sky_material = SubResource("ProceduralSkyMaterial_palwg")
 
 [sub_resource type="Environment" id="Environment_sq8tk"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.0823529, 0.113725, 0.156863, 1)
 sky = SubResource("Sky_4jbvm")
+ambient_light_source = 2
+ambient_light_energy = 7.59
 tonemap_mode = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ol7hf"]
-albedo_color = Color(0, 0.415686, 1, 1)
+[sub_resource type="Resource" id="Resource_t025e"]
+script = ExtResource("8_64iu4")
+name = "Rowan"
+health = 4
+damage = 1
+speed = 2.0
+movement = 4
+reach = 1
+current_health = 3
 
-[sub_resource type="SphereMesh" id="SphereMesh_vvwkj"]
-material = SubResource("StandardMaterial3D_ol7hf")
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_o3a5p"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1thit"]
-albedo_color = Color(1, 0.0196078, 0.215686, 1)
+[sub_resource type="Animation" id="Animation_3y1fg"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ftc3q"]
+[sub_resource type="Animation" id="Animation_c2txo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eso8a"]
+_data = {
+"Idle": SubResource("Animation_3y1fg"),
+"RESET": SubResource("Animation_c2txo")
+}
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_xwh0e"]
 size = Vector2(10, 14)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g38jy"]
+albedo_color = Color(0.145098, 0.337255, 0.180392, 1)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tyglw"]
 data = PackedVector3Array(5, 0, 7, -5, 0, 7, 5, 0, -7, -5, 0, 7, -5, 0, -7, 5, 0, -7)
@@ -54,30 +98,51 @@ size = Vector3(1, 1, 4)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ij2c7"]
 data = PackedVector3Array(-0.5, 0.5, 2, 0.5, 0.5, 2, -0.5, -0.5, 2, 0.5, 0.5, 2, 0.5, -0.5, 2, -0.5, -0.5, 2, 0.5, 0.5, -2, -0.5, 0.5, -2, 0.5, -0.5, -2, -0.5, 0.5, -2, -0.5, -0.5, -2, 0.5, -0.5, -2, 0.5, 0.5, 2, 0.5, 0.5, -2, 0.5, -0.5, 2, 0.5, 0.5, -2, 0.5, -0.5, -2, 0.5, -0.5, 2, -0.5, 0.5, -2, -0.5, 0.5, 2, -0.5, -0.5, -2, -0.5, 0.5, 2, -0.5, -0.5, 2, -0.5, -0.5, -2, 0.5, 0.5, 2, -0.5, 0.5, 2, 0.5, 0.5, -2, -0.5, 0.5, 2, -0.5, 0.5, -2, 0.5, 0.5, -2, -0.5, -0.5, 2, 0.5, -0.5, 2, -0.5, -0.5, -2, 0.5, -0.5, 2, 0.5, -0.5, -2, -0.5, -0.5, -2)
 
+[sub_resource type="Resource" id="Resource_ee4yc"]
+script = ExtResource("8_64iu4")
+name = "Lulu"
+health = 4
+damage = 1
+speed = 2.0
+movement = 3
+reach = 2
+current_health = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afuev"]
+bg_color = Color(0.752941, 0.580392, 0.45098, 1)
+
 [node name="Stage" type="Node3D"]
 
-[node name="Clock" type="Node" parent="."]
-script = ExtResource("1_pvpci")
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.487961, 0.109075, 0, 0.218148, 0.975916, -0.500003, 0.845166, -0.188921, 0, 0, 0)
+light_energy = 0.684
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sq8tk")
 
-[node name="Grid" parent="." instance=ExtResource("2_k5lxv")]
-
 [node name="Neighborhood" type="Node3D" parent="." groups=["demo_neighborhood"]]
 script = ExtResource("2_y3l82")
 
-[node name="Enemy" type="CharacterBody3D" parent="Neighborhood" groups=["demo", "enemy"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -2)
-script = ExtResource("3_qkl7h")
-
-[node name="Enemy2" type="MeshInstance3D" parent="Neighborhood/Enemy"]
-mesh = SubResource("SphereMesh_vvwkj")
-skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_1thit")
+[node name="Enemy" type="CharacterBody3D" parent="Neighborhood" groups=["demo"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -3)
+script = ExtResource("7_whwhn")
+stats = SubResource("Resource_t025e")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Neighborhood/Enemy"]
-shape = SubResource("CylinderShape3D_ftc3q")
+shape = SubResource("CylinderShape3D_o3a5p")
+
+[node name="Sprite3D" type="Sprite3D" parent="Neighborhood/Enemy"]
+pixel_size = 0.0313
+billboard = 1
+texture_filter = 0
+texture = ExtResource("8_ybksn")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Neighborhood/Enemy"]
+autoplay = "Idle"
+libraries = {
+"": SubResource("AnimationLibrary_eso8a")
+}
 
 [node name="Floor" type="MeshInstance3D" parent="Neighborhood" groups=["floor"]]
 mesh = SubResource("PlaneMesh_xwh0e")
@@ -98,7 +163,7 @@ script = ExtResource("5_tb50n")
 _size = Vector2(4, 1)
 
 [node name="Wall3" type="MeshInstance3D" parent="Neighborhood"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0.5, -0.5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0.5, 1.75605)
 transparency = 0.72
 mesh = SubResource("BoxMesh_nia24")
 skeleton = NodePath("../..")
@@ -107,7 +172,7 @@ script = ExtResource("5_tb50n")
 _size = Vector2(1, 4)
 
 [node name="Wall" type="MeshInstance3D" parent="Neighborhood"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.5, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.64286, 0.5, -2.5)
 transparency = 0.72
 mesh = SubResource("BoxMesh_dv6sa")
 skeleton = NodePath("../..")
@@ -120,22 +185,42 @@ _size = Vector2(1, 4)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Neighborhood/Wall/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ij2c7")
 
-[node name="Ally" type="CharacterBody3D" parent="." groups=["ally"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -3)
-script = ExtResource("4_8m5va")
-movement = 2
-reach = 2
+[node name="Isabelle" parent="." instance=ExtResource("5_yg0bw")]
+controlling = true
+stats = SubResource("Resource_ee4yc")
 
-[node name="Ally" type="MeshInstance3D" parent="Ally"]
-mesh = SubResource("SphereMesh_vvwkj")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ally"]
-shape = SubResource("CylinderShape3D_ftc3q")
+[node name="Grid" parent="." instance=ExtResource("2_k5lxv")]
 
 [node name="GameCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, 0, 4.5, -0.5)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, -3, 30, 20)
+fov = 10.0
 script = ExtResource("6_m1i4b")
-follow_distance = 4.25
-camera_offset = 1.5
-follow_speed = 0.033
+camera_offset = 17.165
+follow_speed = 0.043
+
+[node name="Clock" type="Node" parent="."]
+script = ExtResource("1_pvpci")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="StatusPanel" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 384.0
+offset_bottom = 80.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_afuev")
+script = ExtResource("9_efe0l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StatusPanel"]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="CanvasLayer/StatusPanel/VBoxContainer"]
+layout_mode = 2
+text = "Lucy"
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/StatusPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+max_value = 4.0
+step = 1.0
+value = 2.0
+show_percentage = false

@@ -36,7 +36,7 @@ func _set_active_unit() -> void:
 
 
 func _has_highest_speed(a : Unit, b : Unit) -> bool:
-	if a.speed > b.speed:
+	if a.stats.speed > b.stats.speed:
 		return true
 	else:
 		return false

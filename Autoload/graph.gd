@@ -38,15 +38,17 @@ func _add_neighborhood(neighborhood : Neighborhood) -> void:
 			point_map.append([])
 			var xi : int = 0
 			for x in range(box.position.x, box.end.x + 1, 1): 
-				point_map[zi].append(_graph.get_available_point_id())
-				_graph.add_point(point_map[zi][xi], Vector3(x,0,z))
 				
 				var blocked := false
-				var weight : float = 0.0
+				var weight : float = 1.0
 				for prop in props:
 					if prop.rect.has_point(Vector2(x,z)):
 						blocked = true
+						weight = prop.weight
 						break
+						
+				point_map[zi].append(_graph.get_available_point_id())
+				_graph.add_point(point_map[zi][xi], Vector3(x,0,z), weight)
 				
 				if blocked:
 					_graph.set_point_disabled(point_map[zi][xi])

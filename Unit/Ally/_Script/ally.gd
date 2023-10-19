@@ -20,7 +20,3 @@ func _ready() -> void:
 func _on_encounter_started(group : String):
 	super._on_encounter_started(group)
 	Graph.register_tile(self, -1)
-	await get_tree().create_timer(1).timeout
-	var move_rng = Graph.get_range_ids(tile_index,movement,true)
-	var all_rng = Graph.get_range_ids(tile_index,movement + reach,true, true)
-	EventBus.range_requested.emit(move_rng, all_rng)

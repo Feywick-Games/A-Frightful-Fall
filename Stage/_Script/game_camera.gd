@@ -1,8 +1,8 @@
 extends Camera3D
 
-@export_range(1,16)
+@export_range(1,100)
 var follow_distance : float
-@export_range(1,8)
+@export_range(0,100)
 var camera_offset : float
 @export_range(0,1)
 var follow_speed : float = 0.1
@@ -20,7 +20,7 @@ func _on_camera_follow_requested(leader : Node3D) -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if _leader:
 		if _leader.global_position.distance_to(global_position) > follow_distance:
 			if _destination_reached:
