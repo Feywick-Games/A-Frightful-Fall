@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ducr4vlggsnbf"
-path="res://.godot/imported/wisp.png-eb185e50703e6b56aca8e7f3538db8c7.ctex"
+uid="uid://c70gbhs5tnv7b"
+path="res://.godot/imported/fairy.png-89161dd9bddcc8a5160deaf641b503e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Unit/Enemy/_Sprite/wisp.png"
-dest_files=["res://.godot/imported/wisp.png-eb185e50703e6b56aca8e7f3538db8c7.ctex"]
+source_file="res://Unit/Enemy/_Sprite/fairy.png"
+dest_files=["res://.godot/imported/fairy.png-89161dd9bddcc8a5160deaf641b503e4.ctex"]
 
 [params]
 
