@@ -1,9 +1,23 @@
-[gd_scene load_steps=8 format=3 uid="uid://76j45ew8hl5v"]
+[gd_scene load_steps=19 format=3 uid="uid://76j45ew8hl5v"]
 
-[ext_resource type="Script" path="res://Unit/Ally/_Script/ally.gd" id="1_d84qs"]
+[ext_resource type="Script" path="res://Unit/Ally/Player/_Script/player.gd" id="1_jsfet"]
 [ext_resource type="Texture2D" uid="uid://2dn2ciccs6o4" path="res://Unit/Ally/_Sprite/lucy.png" id="2_g3j3v"]
+[ext_resource type="Script" path="res://Unit/_Script/stat_block.gd" id="2_toa3a"]
+[ext_resource type="AnimationLibrary" uid="uid://ctspqk0opydua" path="res://Unit/Ally/_Animation/lucy_animlib.tres" id="3_qtqr6"]
+
+[sub_resource type="Resource" id="Resource_lq8nv"]
+script = ExtResource("2_toa3a")
+name = "Lucy"
+health = 0
+damage = 1
+speed = 0.0
+movement = 0
+reach = 0
+current_health = null
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ftc3q"]
+height = 1.0
+radius = 0.25
 
 [sub_resource type="Animation" id="Animation_4s81b"]
 resource_name = "IdleDown"
@@ -21,8 +35,9 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_5bgck"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_5svet"]
+resource_name = "IdleLeft"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -33,11 +48,43 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [14]
+}
+
+[sub_resource type="Animation" id="Animation_5oxxa"]
+resource_name = "IdleRight"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [21]
+}
+
+[sub_resource type="Animation" id="Animation_jroml"]
+resource_name = "IdleUp"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [7]
 }
 
 [sub_resource type="Animation" id="Animation_gi5i3"]
-resource_name = "WalkDown"
+resource_name = "MoveDown"
 length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -53,16 +100,135 @@ tracks/0/keys = {
 "values": [1, 2, 3, 4, 5, 6]
 }
 
+[sub_resource type="Animation" id="Animation_xghiv"]
+resource_name = "MoveLeft"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_twt86"]
+resource_name = "MoveRight"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [22, 23, 24, 25, 26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_d5vi4"]
+resource_name = "MoveUp"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_5bgck"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles3D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WishParticles:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OmniLight3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xxwah"]
 _data = {
 "IdleDown": SubResource("Animation_4s81b"),
-"RESET": SubResource("Animation_5bgck"),
-"WalkDown": SubResource("Animation_gi5i3")
+"IdleLeft": SubResource("Animation_5svet"),
+"IdleRight": SubResource("Animation_5oxxa"),
+"IdleUp": SubResource("Animation_jroml"),
+"MoveDown": SubResource("Animation_gi5i3"),
+"MoveLeft": SubResource("Animation_xghiv"),
+"MoveRight": SubResource("Animation_twt86"),
+"MoveUp": SubResource("Animation_d5vi4"),
+"RESET": SubResource("Animation_5bgck")
 }
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_raeoc"]
+albedo_color = Color(0.709819, 0.910109, 0.937469, 1)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_mqb88"]
+material = SubResource("StandardMaterial3D_raeoc")
+size = Vector2(0.063, 0.063)
 
 [node name="Lucy" type="CharacterBody3D" groups=["ally"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -3)
-script = ExtResource("1_d84qs")
+script = ExtResource("1_jsfet")
+stats = SubResource("Resource_lq8nv")
+animlib_name = "Lucy"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_ftc3q")
@@ -73,9 +239,47 @@ billboard = 1
 shaded = true
 texture_filter = 0
 texture = ExtResource("2_g3j3v")
-hframes = 7
+hframes = 63
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_xxwah")
+"": SubResource("AnimationLibrary_xxwah"),
+"Lucy": ExtResource("3_qtqr6")
 }
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+speed_scale = 0.75
+explosiveness = 1.0
+randomness = 0.39
+lifetime_randomness = 0.34
+mesh = SubResource("QuadMesh_mqb88")
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 20.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+color = Color(0.125536, 0.850996, 0.57644, 1)
+hue_variation_max = 1.0
+
+[node name="WishParticles" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 32
+speed_scale = 0.75
+randomness = 0.39
+lifetime_randomness = 0.34
+mesh = SubResource("QuadMesh_mqb88")
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 1, 0)
+spread = 0.0
+gravity = Vector3(0, 0.5, 0)
+initial_velocity_max = 2.0
+color = Color(0.125536, 0.850996, 0.57644, 1)
+hue_variation_max = 1.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false

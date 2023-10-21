@@ -1,0 +1,293 @@
+[gd_scene load_steps=19 format=3 uid="uid://bcrj3xlieo20p"]
+
+[ext_resource type="Script" path="res://Unit/Enemy/_Script/enemy.gd" id="1_nqj6f"]
+[ext_resource type="Script" path="res://Unit/_Script/stat_block.gd" id="2_8li5f"]
+[ext_resource type="Texture2D" uid="uid://bnjbao4of22dd" path="res://Unit/Enemy/_Sprite/owl.png" id="3_weheu"]
+[ext_resource type="AnimationLibrary" uid="uid://c0110t3cxdewx" path="res://Unit/Enemy/_Animation/owl_animlib.tres" id="4_xnnd0"]
+
+[sub_resource type="Resource" id="Resource_t025e"]
+script = ExtResource("2_8li5f")
+name = "Rowan"
+health = 4
+damage = 1
+speed = 2.0
+movement = 4
+reach = 1
+current_health = 3
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_o3a5p"]
+height = 1.0
+radius = 0.25
+
+[sub_resource type="Animation" id="Animation_3y1fg"]
+resource_name = "IdleDown"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_qmnci"]
+resource_name = "IdleLeft"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16]
+}
+
+[sub_resource type="Animation" id="Animation_veia6"]
+resource_name = "IdleRight"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [20, 21, 22, 23]
+}
+
+[sub_resource type="Animation" id="Animation_gqvlp"]
+resource_name = "IdleUp"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_awwqg"]
+resource_name = "MoveDown"
+length = 0.8
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_8aich"]
+resource_name = "MoveLeft"
+length = 0.8
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 0.870551, 1, 1),
+"update": 1,
+"values": [17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_vbtqu"]
+resource_name = "MoveRight"
+length = 0.8
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_nergk"]
+resource_name = "MoveUp"
+length = 0.8
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [10, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_c2txo"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CPUParticles3D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OmniLight3D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d5nfx"]
+_data = {
+"IdleDown": SubResource("Animation_3y1fg"),
+"IdleLeft": SubResource("Animation_qmnci"),
+"IdleRight": SubResource("Animation_veia6"),
+"IdleUp": SubResource("Animation_gqvlp"),
+"MoveDown": SubResource("Animation_awwqg"),
+"MoveLeft": SubResource("Animation_8aich"),
+"MoveRight": SubResource("Animation_vbtqu"),
+"MoveUp": SubResource("Animation_nergk"),
+"RESET": SubResource("Animation_c2txo")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya7th"]
+albedo_color = Color(0.701991, 0.474342, 0.79237, 1)
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_o1jbn"]
+material = SubResource("StandardMaterial3D_ya7th")
+size = Vector2(0.063, 0.063)
+
+[node name="Owl" type="CharacterBody3D" groups=["demo"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.5, -3)
+script = ExtResource("1_nqj6f")
+stats = SubResource("Resource_t025e")
+animlib_name = "Owl"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_o3a5p")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.0313
+billboard = 1
+shaded = true
+texture_filter = 0
+texture = ExtResource("3_weheu")
+hframes = 52
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "IdleDown"
+speed_scale = 1.5
+libraries = {
+"": SubResource("AnimationLibrary_d5nfx"),
+"Owl": ExtResource("4_xnnd0")
+}
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+emitting = false
+amount = 32
+speed_scale = 0.75
+explosiveness = 0.24
+randomness = 0.39
+lifetime_randomness = 0.34
+mesh = SubResource("QuadMesh_o1jbn")
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(1, 0, 1)
+spread = 30.0
+gravity = Vector3(9, 0, 9)
+initial_velocity_min = 4.0
+initial_velocity_max = 4.0
+color = Color(0.125536, 0.850996, 0.57644, 1)
+hue_variation_max = 1.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
+light_color = Color(0.701991, 0.474342, 0.79237, 1)
+light_negative = true
+omni_range = 1.5

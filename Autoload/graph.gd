@@ -99,7 +99,6 @@ func get_range_ids(start_index : int, distance : int, is_ally : bool, toggle_all
 	_toggle_tiles(toggle_all, is_ally)
 	var output : Array[int] = []
 	var start_pos : Vector3 = _graph.get_point_position(start_index)
-	print(start_pos)
 	var zi : int = 0
 	for z in range(start_pos.z - distance, start_pos.z + distance + 1):
 		for x in range(start_pos.x - zi, start_pos.x + zi + 1):
@@ -107,10 +106,7 @@ func get_range_ids(start_index : int, distance : int, is_ally : bool, toggle_all
 			
 			if point_id in output:
 				continue
-			
-			if _graph.is_point_disabled(point_id):
-				print("disabled")
-			
+
 			var point_dist : int = len(_graph.get_id_path(start_index, point_id)) - 1
 			
 			if point_dist <= distance and point_dist >= 0:
@@ -126,6 +122,10 @@ func get_range_ids(start_index : int, distance : int, is_ally : bool, toggle_all
 
 func has_occupant(id : int) -> bool:
 	return id in _unit_registry
+	
+	
+func get_closest_position(pos : Vector3) -> void:
+	return _graph.get_point_position(_graph.get_closest_point(pos))
 
 
 #func _depth_search(source_id : int, depth : int, con_id : int = -1, output =[]) -> Array[int]:
