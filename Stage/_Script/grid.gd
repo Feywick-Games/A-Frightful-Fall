@@ -36,8 +36,17 @@ func _ready() -> void:
 	EventBus.encounter_started.connect(_on_encounter_started)
 	EventBus.action_panel_toggled.connect(_on_action_panel_toggled)
 	EventBus.action_taken.connect(_on_action_taken)
+	EventBus.encounter_ended.connect(_on_encounter_ended)
 	_selection_node = Node3D.new()
 	add_child(_selection_node)
+
+
+func _on_encounter_ended() -> void:
+	_empty_grid()
+	for mesh_i in _mesh_dict.values() as Array[MeshInstance3D]:
+		mesh_i.queue_free()
+	_mesh_dict.clear()
+	_cur_tile_idx = -1
 
 
 func _on_action_panel_toggled(tile : int) -> void:
@@ -58,26 +67,40 @@ func _on_encounter_started(group : String) -> void:
 func _on_turn_started(_sub_state : GameState.BattleSubState) -> void:
 	_active_unit = GameState.active_unit
 	EventBus.camera_follow_requested.emit(_selection_node)
+	_cur_tile_idx = -1
 
 
 func _on_range_requested(tile_index : int, stats : StatBlock, is_ally : bool) -> void:
+	_cur_tile_idx = -1
 	_movement_range.clear()
 	_action_range.clear()
 	_empty_range.clear()
 	if not GameState.active_unit_moved:
 		_movement_range = Graph.get_range_ids(tile_index,stats.movement, is_ally)
-	var range_ids : Array[int]
-	
-	if not GameState.active_unit_moved:
-		range_ids = Graph.get_range_ids(tile_index, stats.movement + stats.reach, is_ally, true) 
 	else:
-		range_ids = Graph.get_range_ids(tile_index, stats.reach, is_ally, true)
-		_movement_range.append(tile_index)
+		_movement_range = [tile_index]
+	var range_ids : Array[int]
+
+
+	var new_range : Array[int]
+	for id in _movement_range:
+		if not Graph.get_tile_occupant(id) or id == tile_index:
+			new_range.append(id)
+	
+	_movement_range = new_range
+
+	for id in _movement_range:
+		var action_ids := Graph.get_range_ids(id, stats.reach, is_ally, true)
+		for action_id in action_ids:
+			if action_id not in range_ids:
+				range_ids.append(action_id)
+
 	
 	
 	for id in range_ids:
 		if not id in _movement_range:
-			if Graph.has_occupant(id):
+			var occupant = Graph.get_tile_occupant(id)
+			if occupant and occupant.is_ally != is_ally:
 				_action_range.append(id)
 			else:
 				_empty_range.append(id)

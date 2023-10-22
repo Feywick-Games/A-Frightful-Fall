@@ -1,21 +1,21 @@
 [gd_scene load_steps=23 format=3 uid="uid://cv7wlmgbd7wd0"]
 
-[ext_resource type="Script" path="res://Unit/Enemy/_Script/enemy.gd" id="1_m5nx0"]
+[ext_resource type="Script" path="res://Unit/Ally/_Script/ally.gd" id="1_s5uxt"]
 [ext_resource type="Script" path="res://Unit/_Script/stat_block.gd" id="2_kor7n"]
 [ext_resource type="Texture2D" uid="uid://bsvafcddase6c" path="res://Unit/Enemy/_Sprite/firefly.png" id="3_ltniv"]
 [ext_resource type="AnimationLibrary" uid="uid://t50b8qw3lvgi" path="res://Unit/Enemy/_Animation/firefly_animlib.tres" id="4_h78ig"]
 [ext_resource type="AnimationLibrary" uid="uid://c6mbpiudi7gps" path="res://Unit/_Animation/general_animlib.tres" id="5_wgk72"]
 
-[sub_resource type="Resource" id="Resource_13gs1"]
+[sub_resource type="Resource" id="Resource_yur0v"]
 script = ExtResource("2_kor7n")
 name = "Firefly"
-health = 5
+health = 3
 damage = 1
 speed = 2.0
 movement = 2
 reach = 1
-damage_type = "Purple"
-damage_time_offset = 0.8
+damage_type = "Red"
+damage_time_offset = 1.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o3a5p"]
 height = 1.0
@@ -418,9 +418,9 @@ material = SubResource("StandardMaterial3D_5cru8")
 size = Vector2(0.063, 0.063)
 
 [node name="Firefly" type="CharacterBody3D" groups=["demo"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, -1.5)
-script = ExtResource("1_m5nx0")
-stats = SubResource("Resource_13gs1")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_s5uxt")
+stats = SubResource("Resource_yur0v")
 animlib_name = "Firefly"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

@@ -302,8 +302,8 @@ hframes = 63
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_xxwah"),
-"Lucy": ExtResource("3_qtqr6"),
-"general_animlib": ExtResource("5_600sy")
+"General": ExtResource("5_600sy"),
+"Lucy": ExtResource("3_qtqr6")
 }
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
@@ -342,6 +342,7 @@ color = Color(0.125536, 0.850996, 0.57644, 1)
 hue_variation_max = 1.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 visible = false
 
 [node name="DeathEmitter" type="CPUParticles3D" parent="."]

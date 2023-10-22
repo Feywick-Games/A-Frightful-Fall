@@ -1,12 +1,15 @@
-[gd_scene load_steps=30 format=3 uid="uid://cxkk4wfsjfuut"]
+[gd_scene load_steps=33 format=3 uid="uid://cxkk4wfsjfuut"]
 
 [ext_resource type="Script" path="res://Stage/_Script/clock.gd" id="1_pvpci"]
 [ext_resource type="PackedScene" uid="uid://dwa6pib61kxmd" path="res://Stage/_Scene/grid.tscn" id="2_k5lxv"]
 [ext_resource type="Script" path="res://Stage/_Script/neighborhood.gd" id="2_y3l82"]
 [ext_resource type="PackedScene" uid="uid://76j45ew8hl5v" path="res://Unit/Ally/_Scene/lucy.tscn" id="5_yg0bw"]
 [ext_resource type="Script" path="res://Stage/_Script/game_camera.gd" id="6_m1i4b"]
-[ext_resource type="PackedScene" uid="uid://cv7wlmgbd7wd0" path="res://Unit/Enemy/_Scene/firefly.tscn" id="10_inxca"]
+[ext_resource type="PackedScene" uid="uid://snam8eujeu65" path="res://Unit/Enemy/_Scene/red_fairy.tscn" id="11_b1mg5"]
+[ext_resource type="PackedScene" uid="uid://wew5txoelujy" path="res://Unit/Enemy/_Scene/green_fairy.tscn" id="12_4h746"]
 [ext_resource type="PackedScene" uid="uid://cby4utlqcjp3i" path="res://Environment/_Scene/floor.tscn" id="13_401ps"]
+[ext_resource type="PackedScene" uid="uid://cv7wlmgbd7wd0" path="res://Unit/Enemy/_Scene/firefly.tscn" id="17_yftmy"]
+[ext_resource type="PackedScene" uid="uid://cjv048nnhvgrr" path="res://Unit/Enemy/_Scene/foxfire.tscn" id="18_kmnxc"]
 [ext_resource type="PackedScene" uid="uid://doumf0a0fnb30" path="res://Environment/_Scene/rock_square.tscn" id="19_i4ubo"]
 [ext_resource type="Shader" path="res://Environment/_Material/noise.gdshader" id="19_y6cpu"]
 [ext_resource type="PackedScene" uid="uid://bhf2l4bqmqvww" path="res://Environment/_Scene/fence_middle.tscn" id="20_mk4pc"]
@@ -109,11 +112,11 @@ _data = {
 [node name="Stage" type="Node3D"]
 
 [node name="GameCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, -3, 30, 20)
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -3, 29.92, 20)
 current = true
 fov = 10.0
 script = ExtResource("6_m1i4b")
-camera_offset = 17.165
+camera_offset = 30.0
 follow_speed = 0.043
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -125,8 +128,6 @@ environment = SubResource("Environment_sq8tk")
 
 [node name="Neighborhood" type="Node3D" parent="." groups=["demo_neighborhood"]]
 script = ExtResource("2_y3l82")
-
-[node name="Firefly" parent="Neighborhood" instance=ExtResource("10_inxca")]
 
 [node name="bush" parent="Neighborhood" instance=ExtResource("20_rck3t")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 1, 0, -2)
@@ -185,6 +186,12 @@ libraries = {
 transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0, 0, -3)
 blocks_vertical = true
 
+[node name="RedFairy" parent="Neighborhood" instance=ExtResource("11_b1mg5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -2)
+
+[node name="GreenFairy" parent="Neighborhood" instance=ExtResource("12_4h746")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0.5, 0)
+
 [node name="Grid" parent="." instance=ExtResource("2_k5lxv")]
 
 [node name="Clock" type="Node" parent="."]
@@ -193,3 +200,9 @@ script = ExtResource("1_pvpci")
 [node name="CanvasLayer" parent="." instance=ExtResource("24_c2n7k")]
 
 [node name="Lucy" parent="." instance=ExtResource("5_yg0bw")]
+
+[node name="Firefly" parent="." instance=ExtResource("17_yftmy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1059, 0.5, -2.02506)
+
+[node name="Foxfire" parent="." instance=ExtResource("18_kmnxc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92984, 0.5, 0.60346)

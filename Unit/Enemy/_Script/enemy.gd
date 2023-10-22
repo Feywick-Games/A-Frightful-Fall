@@ -20,9 +20,10 @@ func _on_encounter_started(group : String):
 		Graph.register_tile(self, -1)
 
 
-func start_turn() -> void:
-	super.start_turn()
-	await EventBus.camera_destination_reached
+func start_turn(participants : Array[Unit]) -> void:
+	super.start_turn(participants)
+	await get_tree().create_timer(1).timeout
+	EventBus.action_taken.emit()
 
 
 func process_turn() -> void:

@@ -1,8 +1,20 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjv048nnhvgrr"]
+[gd_scene load_steps=19 format=3 uid="uid://cjv048nnhvgrr"]
 
 [ext_resource type="Script" path="res://Unit/Enemy/_Script/foxfire.gd" id="1_3xhsd"]
+[ext_resource type="Script" path="res://Unit/_Script/stat_block.gd" id="2_igo5x"]
 [ext_resource type="Texture2D" uid="uid://bpfs0tfkbgl5e" path="res://Unit/Enemy/_Sprite/foxfire.png" id="3_78lp5"]
 [ext_resource type="AnimationLibrary" uid="uid://dmvqjmunn52re" path="res://Unit/Enemy/_Animation/foxfire_animlib.tres" id="4_78qon"]
+
+[sub_resource type="Resource" id="Resource_nbvsl"]
+script = ExtResource("2_igo5x")
+name = "Foxfire"
+health = 4
+damage = 2
+speed = 0.0
+movement = 1
+reach = 3
+damage_type = "Green"
+damage_time_offset = 1.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o3a5p"]
 height = 1.0
@@ -234,9 +246,12 @@ material = SubResource("StandardMaterial3D_0keor")
 size = Vector2(0.031, 0.031)
 
 [node name="Foxfire" type="CharacterBody3D" groups=["demo"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.5, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_3xhsd")
+stats = SubResource("Resource_nbvsl")
 animlib_name = "Foxfire"
+no_attack_direction = true
+attack_charge = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_o3a5p")

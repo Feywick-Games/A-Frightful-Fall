@@ -8,6 +8,11 @@ func _ready() -> void:
 	process_priority = -1
 	EventBus.encounter_started.connect(_on_encounter_started)
 	EventBus.encounter_ended.connect(_on_encounter_ended)
+	EventBus.unit_died.connect(_on_unit_died)
+
+
+func _on_unit_died(unit : Unit) -> void:
+	_unit_registry.erase(unit.tile_index)
 
 
 func _on_encounter_started(group : String) -> void:
@@ -94,6 +99,7 @@ func get_tile_position(id : int) -> Vector3:
 	return _graph.get_point_position(id)
 
 func get_tile_id(position : Vector3) -> int:
+	_toggle_tiles(true)
 	return _graph.get_closest_point(position)
 
 
@@ -134,6 +140,26 @@ func get_range_ids(start_index : int, distance : int, is_ally : bool, toggle_all
 	return output
 
 
+func get_stat_range(tile_index : int, stats : StatBlock, is_ally) -> Array[int]:
+	var output : Array[int]
+	var new_range : Array[int]
+	var move_range := get_range_ids(tile_index, stats.movement, is_ally)
+	for id in move_range:
+		if not get_tile_occupant(id) or id == tile_index:
+			new_range.append(id)
+	
+	move_range = new_range
+	var range_ids : Array[int]
+	
+	for id in move_range:
+		var action_ids := get_range_ids(id, stats.reach, is_ally, true)
+		for action_id in action_ids:
+			if action_id not in range_ids:
+				range_ids.append(action_id)
+
+	return move_range + range_ids
+
+
 func has_occupant(id : int) -> bool:
 	return id in _unit_registry
 	
@@ -142,9 +168,15 @@ func get_closest_position(pos : Vector3) -> void:
 	return _graph.get_point_position(_graph.get_closest_point(pos))
 
 
-func get_path_positions3(from : int, to : int) -> PackedVector3Array:
+func get_path_positions3(from : int, to : int, is_ally : bool, toggle_all := false) -> PackedVector3Array:
+	_toggle_tiles(toggle_all, is_ally)
 	var path := _graph.get_point_path(from, to) 
 	return path.slice(1)
+	
+
+func get_path_ids(from : int, to : int, is_ally : bool, toggle_all := false) -> PackedInt64Array:
+	_toggle_tiles(toggle_all, is_ally)
+	return _graph.get_id_path(from, to).slice(1)
 
 
 #func _depth_search(source_id : int, depth : int, con_id : int = -1, output =[]) -> Array[int]:

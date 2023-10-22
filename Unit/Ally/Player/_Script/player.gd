@@ -8,6 +8,11 @@ func _ready() -> void:
 	super._ready()
 	await get_tree().create_timer(1).timeout 
 	EventBus.encounter_started.emit("demo")
+	GameState.player = self
+
+
+func _on_encounter_ended() -> void:
+	EventBus.camera_follow_requested.emit(self)
 
 
 func _physics_process(delta: float) -> void:
@@ -22,7 +27,6 @@ func _physics_process(delta: float) -> void:
 			_facing = _vec2_to_facing(input_dir)
 		else:
 			velocity.x = move_toward(velocity.x, 0, speed)
-			velocity.z = move_toward(velocity.z, 0, speed)		
-		
+			velocity.z = move_toward(velocity.z, 0, speed)
 		move_and_slide()
 	super._physics_process(delta)

@@ -7,18 +7,32 @@ var _positions_reached : int = 0
 func _ready() -> void:
 	process_priority = 1
 	EventBus.encounter_started.connect(_on_encounter_started)
+	EventBus.encounter_ended.connect(_on_encounter_ended)
 	EventBus.turn_ended.connect(_on_turn_ended)
 	EventBus.unit_died.connect(_on_unit_died)
 
 
+func _on_encounter_ended() -> void:
+	_participants.clear()
+
+
 func _on_unit_died(unit : Unit) -> void:
 	_participants.remove_at(_participants.find(unit))
+	var completed := true
+	
+	for participant in _participants:
+		if participant is Enemy:
+			completed = false
+			
+	if completed:
+		EventBus.encounter_ended.emit()
 
 
 func _on_participant_target_position_reached() -> void:
 	_positions_reached += 1
 	if _positions_reached == len(_participants):
 		EventBus.all_positions_reached.emit()
+		_positions_reached = 0
 
 
 func _on_encounter_started(group : String) -> void:
@@ -34,21 +48,21 @@ func _on_encounter_started(group : String) -> void:
 
 
 func _on_turn_ended() -> void:
-	_set_active_unit()
+	if _participants.size() > 0:
+		_set_active_unit()
 
 
 func _set_active_unit() -> void:
 	var active_unit : Unit = _participants.pop_front()
-	active_unit.start_turn()
-	_participants.append(active_unit)
-	GameState.active_unit = active_unit
 	if active_unit is Ally:
 		EventBus.turn_started.emit(GameState.BattleSubState.PLAYER_TURN)
 	elif active_unit is Enemy:
 		EventBus.turn_started.emit(GameState.BattleSubState.ENEMY_TURN)
 	else:
 		printerr("non clarified unit turn in clock")
-
+	active_unit.start_turn(_participants)
+	_participants.append(active_unit)
+	GameState.active_unit = active_unit
 
 
 

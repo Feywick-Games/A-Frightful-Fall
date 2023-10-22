@@ -1,14 +1,21 @@
 class_name Ally
 extends Unit
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	super._ready()
 	self.is_ally = true
-#	for point in rng:
-#		var pos = Graph.get_tile_position(point)
-#		print(pos)
-#		print(abs(pos.x - node_pos.x) + abs(pos.z - node_pos.z))
+
+
+
+func _process(delta: float) -> void:
+	super._process(delta)
+	if GameState.state == GameState.State.ROAM:
+		if velocity.length() < 0.01:
+			_animate("Idle", _facing)
+		else:
+			_animate("Move", _facing)
+	
 
 
 func _on_encounter_started(group : String):

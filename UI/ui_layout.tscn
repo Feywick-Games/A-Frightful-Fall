@@ -112,6 +112,7 @@ offset_bottom = 40.0
 script = ExtResource("1_taxef")
 
 [node name="ActionPanel" type="MarginContainer" parent="FlyAwayMenu"]
+layout_mode = 0
 offset_left = 848.0
 offset_top = 393.0
 offset_right = 1152.0

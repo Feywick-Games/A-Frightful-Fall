@@ -23,11 +23,13 @@ var state : State
 var sub_state : int
 var active_unit : Unit
 var active_unit_moved := false
+var player : Player
 
 func _ready() -> void:
 	EventBus.encounter_started.connect(_on_encounter_started)
 	EventBus.encounter_ended.connect(_on_encounter_ended)
 	EventBus.turn_started.connect(_on_turn_started)
+	process_priority = -1
 
 
 func _on_encounter_started(_group : String) -> void:
@@ -36,7 +38,7 @@ func _on_encounter_started(_group : String) -> void:
 
 
 func _on_encounter_ended() -> void:
-	state = State.BATTLE
+	state = State.ROAM
 
 
 func _on_turn_started(battle_state : BattleSubState) -> void:
