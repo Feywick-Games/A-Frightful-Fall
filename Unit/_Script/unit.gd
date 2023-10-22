@@ -14,6 +14,8 @@ var animlib_name : String
 var target_position : Vector3
 var moving := false
 
+var _path : PackedVector3Array
+
 enum Facing {
 	VOID,
 	DOWN,
@@ -44,12 +46,11 @@ func _on_target_position_reached() -> void:
 
 
 func _process(delta: float) -> void:
-	if GameState.state == GameState.State.ROAM or moving:
-		if velocity.length() < 0.01:
-			_animate("Idle", _facing)
-			moving = false
-		else:
-			_animate("Move", _facing)
+	if velocity.length() < 0.01:
+		_animate("Idle", _facing)
+		moving = false
+	else:
+		_animate("Move", _facing)
 
 
 func _physics_process(delta: float) -> void:
@@ -61,8 +62,7 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 		else:
 			global_position = target_position
-			velocity = Vector3.ZERO
-			target_position_reached.emit()
+			_get_next_path_position()
 
 
 
@@ -70,6 +70,11 @@ func start_turn() -> void:
 	var move_rng = Graph.get_range_ids(tile_index,stats.movement,true)
 	var all_rng = Graph.get_range_ids(tile_index,stats.movement + stats.reach,true, true)
 	EventBus.range_requested.emit(tile_index,stats,is_ally)
+
+
+func end_turn() -> void:
+	EventBus.turn_ended.emit()
+
 
 func _vec2_to_facing(dir : Vector2) -> Facing:
 	if dir.x > 0:
@@ -80,6 +85,26 @@ func _vec2_to_facing(dir : Vector2) -> Facing:
 		return Facing.UP
 	else:
 		return Facing.DOWN
+
+
+func move_to_tile(tile_id : int) -> void:
+	_path = Graph.get_path_positions3(tile_index, tile_id)
+	_get_next_path_position()
+
+
+func _get_next_path_position() -> void:
+	if len(_path) == 0:
+		var old_id = tile_index
+		tile_index = Graph.get_tile_id(target_position)
+		Graph.register_tile(self, old_id)
+		moving = false
+		velocity = Vector3.ZERO
+		target_position_reached.emit()
+		return
+	
+	target_position = Vector3(_path[0].x, global_position.y, _path[0].z)
+	moving = true
+	_path.remove_at(0)
 
 
 func _animate(anim : String, dir : Facing, reverse := false) -> void:

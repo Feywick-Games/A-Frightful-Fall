@@ -2,9 +2,9 @@ class_name StatusPanel
 extends PanelContainer
 
 @onready
-var health_bar = $VBoxContainer/HealthBar
+var health_bar = %HealthBar
 @onready
-var name_label = $VBoxContainer/NameLabel
+var name_label = %NameLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

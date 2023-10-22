@@ -1,0 +1,264 @@
+[gd_scene load_steps=19 format=3 uid="uid://vodbmyjrd0pm"]
+
+[ext_resource type="Script" path="res://UI/_Script/status_panel.gd" id="1_6e1sy"]
+[ext_resource type="Script" path="res://UI/_Script/action_panel_button.gd" id="1_rulwc"]
+[ext_resource type="Script" path="res://UI/_Script/flyaway.gd" id="1_taxef"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mqbr2"]
+bg_color = Color(0.753292, 0.580346, 0.450889, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rbqfk"]
+content_margin_left = 12.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_0g3jq"]
+content_margin_left = 32.0
+color = Color(0.513909, 0.109422, 0.364431, 1)
+grow_begin = -1.0
+grow_end = 0.0
+thickness = 9
+vertical = true
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_my4u1"]
+content_margin_left = 32.0
+color = Color(0.270634, 0.160708, 0.246693, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 8
+vertical = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_utgwh"]
+content_margin_left = 12.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2goa"]
+content_margin_left = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qvu1e"]
+bg_color = Color(0.753292, 0.580346, 0.450889, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umaph"]
+bg_color = Color(0.180255, 0.133364, 0.184161, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.431357, 0.152895, 0.152895, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ua34"]
+bg_color = Color(0.560815, 0.827543, 1, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+shadow_color = Color(1, 1, 1, 0.266667)
+shadow_size = 8
+anti_aliasing = false
+
+[sub_resource type="Animation" id="Animation_vtktk"]
+resource_name = "Pulse"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_styles/fill:shadow_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 12]
+}
+
+[sub_resource type="Animation" id="Animation_1vih7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:theme_override_styles/fill:shadow_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nng1v"]
+_data = {
+"Pulse": SubResource("Animation_vtktk"),
+"RESET": SubResource("Animation_1vih7")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afuev"]
+bg_color = Color(0.752941, 0.580392, 0.45098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xfqpn"]
+bg_color = Color(0.910109, 0.231067, 0.231067, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x31c3"]
+bg_color = Color(0.117235, 0.737163, 0.450889, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+follow_viewport_enabled = true
+
+[node name="FlyAwayMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_taxef")
+
+[node name="ActionPanel" type="MarginContainer" parent="FlyAwayMenu"]
+offset_left = 848.0
+offset_top = 393.0
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="PanelContainer" type="PanelContainer" parent="FlyAwayMenu/ActionPanel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mqbr2")
+
+[node name="MarginContainer" type="MarginContainer" parent="FlyAwayMenu/ActionPanel/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 21
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="ActionButton" type="Button" parent="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.243137, 0.207843, 0.27451, 1)
+theme_override_colors/font_pressed_color = Color(0.780652, 0.862715, 0.815824, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rbqfk")
+theme_override_styles/hover = SubResource("StyleBoxLine_0g3jq")
+theme_override_styles/pressed = SubResource("StyleBoxLine_my4u1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rbqfk")
+theme_override_styles/focus = SubResource("StyleBoxLine_0g3jq")
+text = "Move"
+alignment = 0
+script = ExtResource("1_rulwc")
+
+[node name="WishButton" type="Button" parent="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.243137, 0.207843, 0.27451, 1)
+theme_override_colors/font_pressed_color = Color(0.780652, 0.862715, 0.815824, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_utgwh")
+theme_override_styles/hover = SubResource("StyleBoxLine_0g3jq")
+theme_override_styles/pressed = SubResource("StyleBoxLine_my4u1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rbqfk")
+theme_override_styles/focus = SubResource("StyleBoxLine_0g3jq")
+text = "Wish"
+alignment = 0
+script = ExtResource("1_rulwc")
+
+[node name="EndTurnButton" type="Button" parent="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.243137, 0.207843, 0.27451, 1)
+theme_override_colors/font_pressed_color = Color(0.780652, 0.862715, 0.815824, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2goa")
+theme_override_styles/hover = SubResource("StyleBoxLine_0g3jq")
+theme_override_styles/pressed = SubResource("StyleBoxLine_my4u1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rbqfk")
+theme_override_styles/focus = SubResource("StyleBoxLine_0g3jq")
+text = "End Turn"
+alignment = 0
+script = ExtResource("1_rulwc")
+
+[node name="WishPanel" type="MarginContainer" parent="FlyAwayMenu"]
+custom_minimum_size = Vector2(64, 256)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1048.0
+offset_right = 1112.0
+offset_bottom = 256.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="FlyAwayMenu/WishPanel"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qvu1e")
+
+[node name="MarginContainer" type="MarginContainer" parent="FlyAwayMenu/WishPanel/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="FlyAwayMenu/WishPanel/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="WishGauge" type="ProgressBar" parent="FlyAwayMenu/WishPanel/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_umaph")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7ua34")
+max_value = 3.0
+step = 1.0
+value = 1.0
+fill_mode = 3
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FlyAwayMenu/WishPanel/PanelContainer/MarginContainer/VBoxContainer/WishGauge"]
+autoplay = "Pulse"
+libraries = {
+"": SubResource("AnimationLibrary_nng1v")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(256, 80)
+offset_right = 102.0
+offset_bottom = 66.0
+theme_override_constants/margin_top = 8
+
+[node name="StatusPanel" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_afuev")
+script = ExtResource("1_6e1sy")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/StatusPanel"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/StatusPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+
+[node name="NameLabel" type="Label" parent="MarginContainer/StatusPanel/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lucy"
+
+[node name="HealthBar" type="ProgressBar" parent="MarginContainer/StatusPanel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_xfqpn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_x31c3")
+max_value = 4.0
+step = 1.0
+value = 2.0
+show_percentage = false
+
+[connection signal="pressed" from="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ActionButton" to="FlyAwayMenu" method="_on_action_button_pressed"]
+[connection signal="pressed" from="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/EndTurnButton" to="FlyAwayMenu" method="_on_end_turn_button_pressed"]

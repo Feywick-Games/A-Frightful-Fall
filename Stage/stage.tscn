@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cxkk4wfsjfuut"]
+[gd_scene load_steps=52 format=3 uid="uid://cxkk4wfsjfuut"]
 
 [ext_resource type="Script" path="res://Stage/_Script/clock.gd" id="1_pvpci"]
 [ext_resource type="PackedScene" uid="uid://dwa6pib61kxmd" path="res://Stage/_Scene/grid.tscn" id="2_k5lxv"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://Unit/_Script/stat_block.gd" id="8_64iu4"]
 [ext_resource type="PackedScene" uid="uid://snam8eujeu65" path="res://Unit/Enemy/_Scene/red_fairy.tscn" id="8_pg5du"]
 [ext_resource type="PackedScene" uid="uid://wew5txoelujy" path="res://Unit/Enemy/_Scene/green_fairy.tscn" id="9_7q2v8"]
-[ext_resource type="Script" path="res://UI/_Script/status_panel.gd" id="9_efe0l"]
 [ext_resource type="PackedScene" uid="uid://cv7wlmgbd7wd0" path="res://Unit/Enemy/_Scene/firefly.tscn" id="10_inxca"]
 [ext_resource type="PackedScene" uid="uid://bcrj3xlieo20p" path="res://Unit/Enemy/_Scene/owl.tscn" id="12_ilg1k"]
 [ext_resource type="PackedScene" uid="uid://cby4utlqcjp3i" path="res://Environment/_Scene/floor.tscn" id="13_401ps"]
@@ -24,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://wmqx1o0xjs3h" path="res://Environment/_Scene/tree.tscn" id="20_t11w8"]
 [ext_resource type="PackedScene" uid="uid://w86ywq48ipyr" path="res://Environment/_Scene/bush_2.tscn" id="21_ldgfs"]
 [ext_resource type="PackedScene" uid="uid://bpuyxsjq56m88" path="res://Environment/_Scene/pond_edge.tscn" id="23_1g4q2"]
+[ext_resource type="PackedScene" uid="uid://vodbmyjrd0pm" path="res://UI/ui_layout.tscn" id="24_c2n7k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_palwg"]
 ground_horizon_color = Color(0.745098, 0.687255, 0.614706, 1)
@@ -420,9 +420,6 @@ movement = 3
 reach = 2
 current_health = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_afuev"]
-bg_color = Color(0.752941, 0.580392, 0.45098, 1)
-
 [node name="Stage" type="Node3D"]
 
 [node name="GameCamera" type="Camera3D" parent="."]
@@ -474,7 +471,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -0.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
 
 [node name="GreenFairy" parent="Neighborhood" instance=ExtResource("9_7q2v8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.953018, 0.5, -1.28561)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.953018, 0.5, 1.21439)
 speed = 2.0
 
 [node name="Firefly" parent="Neighborhood" instance=ExtResource("10_inxca")]
@@ -498,19 +495,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1)
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3, 0, -3)
 
 [node name="pond_edge" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
 
 [node name="pond_edge2" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
 
 [node name="pond_edge3" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 3.5)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 3)
 
 [node name="pond_edge4" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 0, 3.5)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 0, 3)
 
 [node name="pond_edge5" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 3.5)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 3)
 
 [node name="Floor" parent="Neighborhood" instance=ExtResource("13_401ps")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
@@ -526,7 +523,7 @@ mesh = SubResource("PlaneMesh_c2mo3")
 surface_material_override/0 = SubResource("ShaderMaterial_uufib")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Neighborhood"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.01, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.01, 3.5)
 mesh = SubResource("PlaneMesh_g6njc")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_2g3gr")
@@ -546,31 +543,9 @@ blocks_vertical = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
 stats = SubResource("Resource_ee4yc")
 
+[node name="Grid" parent="." instance=ExtResource("2_k5lxv")]
+
 [node name="Clock" type="Node" parent="."]
 script = ExtResource("1_pvpci")
 
-[node name="Grid" parent="." instance=ExtResource("2_k5lxv")]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
-
-[node name="StatusPanel" type="PanelContainer" parent="CanvasLayer"]
-offset_right = 384.0
-offset_bottom = 80.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_afuev")
-script = ExtResource("9_efe0l")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StatusPanel"]
-layout_mode = 2
-
-[node name="NameLabel" type="Label" parent="CanvasLayer/StatusPanel/VBoxContainer"]
-layout_mode = 2
-text = "Lucy"
-
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer/StatusPanel/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-max_value = 4.0
-step = 1.0
-value = 2.0
-show_percentage = false
+[node name="CanvasLayer" parent="." instance=ExtResource("24_c2n7k")]

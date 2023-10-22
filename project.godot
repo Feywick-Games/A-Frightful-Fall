@@ -29,6 +29,11 @@ window/stretch/mode="canvas_items"
 
 import/blender/enabled=false
 
+[gui]
+
+theme/default_theme_scale=3.0
+theme/custom_font="res://UI/_Font/alagard.ttf"
+
 [importer_defaults]
 
 texture={

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dwa6pib61kxmd"]
+[gd_scene load_steps=16 format=3 uid="uid://dwa6pib61kxmd"]
 
 [ext_resource type="Script" path="res://Stage/_Script/grid.gd" id="1_tdw1m"]
 
@@ -56,6 +56,15 @@ albedo_color = Color(0.596078, 0.0235294, 0.47451, 0.290196)
 material = SubResource("StandardMaterial3D_uu58t")
 orientation = 1
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0fae"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.0627451, 0.0470588, 0.0588235, 0.458824)
+
+[sub_resource type="QuadMesh" id="QuadMesh_e3qrq"]
+material = SubResource("StandardMaterial3D_r0fae")
+orientation = 1
+
 [node name="Grid" type="Node3D"]
 script = ExtResource("1_tdw1m")
 _move_mesh = SubResource("QuadMesh_44e1s")
@@ -64,3 +73,4 @@ _empty_mesh = SubResource("QuadMesh_0yixr")
 _move_select_mesh = SubResource("QuadMesh_sgo2n")
 _action_select_mesh = SubResource("QuadMesh_v778e")
 _empty_select_mesh = SubResource("QuadMesh_0css1")
+_oob_mesh = SubResource("QuadMesh_e3qrq")

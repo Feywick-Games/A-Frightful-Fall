@@ -249,6 +249,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_wpio7"]
 resource_name = "MoveDown"
 length = 0.4
+loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false

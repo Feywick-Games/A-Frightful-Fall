@@ -2,9 +2,10 @@ extends Node
 
 var _graph : AStar3D = AStar3D.new()
 var _unit_registry : Dictionary
-
+var aabb : AABB
 
 func _ready() -> void:
+	process_priority = -1
 	EventBus.encounter_started.connect(_on_encounter_started)
 	EventBus.encounter_ended.connect(_on_encounter_ended)
 
@@ -34,6 +35,7 @@ func _add_neighborhood(neighborhood : Neighborhood) -> void:
 	for box in floor_boxes:
 		var point_map : Array[Array] = []
 		var zi : int = 0
+		aabb = aabb.merge(box)
 		for z in range(box.position.z, box.end.z + 1, 1):
 			point_map.append([])
 			var xi : int = 0
@@ -138,6 +140,11 @@ func has_occupant(id : int) -> bool:
 	
 func get_closest_position(pos : Vector3) -> void:
 	return _graph.get_point_position(_graph.get_closest_point(pos))
+
+
+func get_path_positions3(from : int, to : int) -> PackedVector3Array:
+	var path := _graph.get_point_path(from, to) 
+	return path.slice(1)
 
 
 #func _depth_search(source_id : int, depth : int, con_id : int = -1, output =[]) -> Array[int]:
