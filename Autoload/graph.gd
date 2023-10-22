@@ -39,24 +39,36 @@ func _add_neighborhood(neighborhood : Neighborhood) -> void:
 			var xi : int = 0
 			for x in range(box.position.x, box.end.x + 1, 1): 
 				
+				var blocked_up := false
+				var blocked_left := false
+				
 				var blocked := false
 				var weight : float = 1.0
 				for prop in props:
+				
 					if prop.rect.has_point(Vector2(x,z)):
-						blocked = true
-						weight = prop.weight
-						break
-						
+						if not prop.is_blockade:
+							blocked = true
+							weight = prop.weight
+							break
+					if prop.is_blockade:
+						if prop.rect.has_point(Vector2(x,z - 1)):
+							if prop.blocks_vertical:
+								blocked_up = true
+						if prop.rect.has_point(Vector2(x-1,z)):
+							if not prop.blocks_vertical:
+								blocked_left = true
+
 				point_map[zi].append(_graph.get_available_point_id())
 				_graph.add_point(point_map[zi][xi], Vector3(x,0,z), weight)
 				
 				if blocked:
 					_graph.set_point_disabled(point_map[zi][xi])
 				else:
-					if xi > 0:
+					if xi > 0 and not blocked_left:
 						if point_map[zi][xi-1] != null:
 							_graph.connect_points(point_map[zi][xi], point_map[zi][xi-1])
-					if zi > 0:
+					if zi > 0 and not blocked_up:
 						if point_map[zi-1][xi] != null:
 							_graph.connect_points(point_map[zi][xi], point_map[zi-1][xi])
 				xi += 1

@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhf2l4bqmqvww"]
+
+[ext_resource type="PackedScene" uid="uid://b3gtlodhj5t4u" path="res://Environment/_Model/fence_middle.glb" id="1_dkh0b"]
+[ext_resource type="Shader" path="res://Environment/_Material/noise.gdshader" id="2_dv5bp"]
+[ext_resource type="Script" path="res://Stage/_Script/prop.gd" id="3_45kqg"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y5sup"]
+noise_type = 3
+frequency = 0.1161
+fractal_gain = 0.75
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pcgrs"]
+width = 32
+height = 32
+seamless = true
+noise = SubResource("FastNoiseLite_y5sup")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mijli"]
+render_priority = 0
+shader = ExtResource("2_dv5bp")
+shader_parameter/color = Color(0.670588, 0.580392, 0.478431, 1)
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_pcgrs")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n3ack"]
+size = Vector3(0.2, 0.5, 1.07456)
+
+[node name="fence_middle" instance=ExtResource("1_dkh0b")]
+script = ExtResource("3_45kqg")
+_size = Vector2(1, 1)
+is_blockade = true
+
+[node name="Cube_002" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.5, 0.605088, -0.412194)
+surface_material_override/0 = SubResource("ShaderMaterial_mijli")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("BoxShape3D_n3ack")

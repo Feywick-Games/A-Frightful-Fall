@@ -25,6 +25,10 @@ Graph="*res://Autoload/graph.gd"
 
 window/stretch/mode="canvas_items"
 
+[filesystem]
+
+import/blender/enabled=false
+
 [importer_defaults]
 
 texture={

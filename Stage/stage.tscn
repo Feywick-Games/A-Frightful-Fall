@@ -1,9 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://cxkk4wfsjfuut"]
+[gd_scene load_steps=53 format=3 uid="uid://cxkk4wfsjfuut"]
 
 [ext_resource type="Script" path="res://Stage/_Script/clock.gd" id="1_pvpci"]
 [ext_resource type="PackedScene" uid="uid://dwa6pib61kxmd" path="res://Stage/_Scene/grid.tscn" id="2_k5lxv"]
 [ext_resource type="Script" path="res://Stage/_Script/neighborhood.gd" id="2_y3l82"]
-[ext_resource type="Script" path="res://Stage/_Script/prop.gd" id="5_tb50n"]
 [ext_resource type="Texture2D" uid="uid://ducr4vlggsnbf" path="res://Unit/Ally/_Sprite/wisp.png" id="5_vk42f"]
 [ext_resource type="PackedScene" uid="uid://76j45ew8hl5v" path="res://Unit/Ally/_Scene/lucy.tscn" id="5_yg0bw"]
 [ext_resource type="Script" path="res://Stage/_Script/game_camera.gd" id="6_m1i4b"]
@@ -16,7 +15,15 @@
 [ext_resource type="Script" path="res://UI/_Script/status_panel.gd" id="9_efe0l"]
 [ext_resource type="PackedScene" uid="uid://cv7wlmgbd7wd0" path="res://Unit/Enemy/_Scene/firefly.tscn" id="10_inxca"]
 [ext_resource type="PackedScene" uid="uid://bcrj3xlieo20p" path="res://Unit/Enemy/_Scene/owl.tscn" id="12_ilg1k"]
+[ext_resource type="PackedScene" uid="uid://cby4utlqcjp3i" path="res://Environment/_Scene/floor.tscn" id="13_401ps"]
 [ext_resource type="PackedScene" uid="uid://cjv048nnhvgrr" path="res://Unit/Enemy/_Scene/foxfire.tscn" id="14_fji5n"]
+[ext_resource type="PackedScene" uid="uid://doumf0a0fnb30" path="res://Environment/_Scene/rock_square.tscn" id="19_i4ubo"]
+[ext_resource type="Shader" path="res://Environment/_Material/noise.gdshader" id="19_y6cpu"]
+[ext_resource type="PackedScene" uid="uid://bhf2l4bqmqvww" path="res://Environment/_Scene/fence_middle.tscn" id="20_mk4pc"]
+[ext_resource type="PackedScene" uid="uid://bkdnhrkujqh3d" path="res://Environment/_Scene/bush.tscn" id="20_rck3t"]
+[ext_resource type="PackedScene" uid="uid://wmqx1o0xjs3h" path="res://Environment/_Scene/tree.tscn" id="20_t11w8"]
+[ext_resource type="PackedScene" uid="uid://w86ywq48ipyr" path="res://Environment/_Scene/bush_2.tscn" id="21_ldgfs"]
+[ext_resource type="PackedScene" uid="uid://bpuyxsjq56m88" path="res://Environment/_Scene/pond_edge.tscn" id="23_1g4q2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_palwg"]
 ground_horizon_color = Color(0.745098, 0.687255, 0.614706, 1)
@@ -28,8 +35,10 @@ sky_material = SubResource("ProceduralSkyMaterial_palwg")
 background_mode = 1
 background_color = Color(0.0823529, 0.113725, 0.156863, 1)
 sky = SubResource("Sky_4jbvm")
-ambient_light_source = 2
-ambient_light_energy = 7.59
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.27
 tonemap_mode = 2
 
 [sub_resource type="Resource" id="Resource_t025e"]
@@ -327,27 +336,79 @@ _data = {
 "RESET": SubResource("Animation_ggbxv")
 }
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_xwh0e"]
-size = Vector2(10, 14)
+[sub_resource type="PlaneMesh" id="PlaneMesh_c2mo3"]
+size = Vector2(2, 5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g38jy"]
-albedo_color = Color(0.215686, 0.305882, 0.290196, 1)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qvkia"]
+frequency = 0.4924
+fractal_type = 2
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_tyglw"]
-data = PackedVector3Array(5, 0, 7, -5, 0, 7, 5, 0, -7, -5, 0, 7, -5, 0, -7, 5, 0, -7)
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_12kfa"]
+width = 64
+height = 160
+noise = SubResource("FastNoiseLite_qvkia")
 
-[sub_resource type="BoxMesh" id="BoxMesh_nia24"]
-size = Vector3(1, 1, 4)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uufib"]
+render_priority = 0
+shader = ExtResource("19_y6cpu")
+shader_parameter/color = Color(0.588235, 0.423529, 0.423529, 1)
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_12kfa")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ji30e"]
-transparency = 1
-albedo_color = Color(0.298039, 0.243137, 0.141176, 1)
+[sub_resource type="PlaneMesh" id="PlaneMesh_g6njc"]
+size = Vector2(3, 2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_dv6sa"]
-size = Vector3(1, 1, 4)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ajc1y"]
+noise_type = 0
+frequency = 0.0412
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ij2c7"]
-data = PackedVector3Array(-0.5, 0.5, 2, 0.5, 0.5, 2, -0.5, -0.5, 2, 0.5, 0.5, 2, 0.5, -0.5, 2, -0.5, -0.5, 2, 0.5, 0.5, -2, -0.5, 0.5, -2, 0.5, -0.5, -2, -0.5, 0.5, -2, -0.5, -0.5, -2, 0.5, -0.5, -2, 0.5, 0.5, 2, 0.5, 0.5, -2, 0.5, -0.5, 2, 0.5, 0.5, -2, 0.5, -0.5, -2, 0.5, -0.5, 2, -0.5, 0.5, -2, -0.5, 0.5, 2, -0.5, -0.5, -2, -0.5, 0.5, 2, -0.5, -0.5, 2, -0.5, -0.5, -2, 0.5, 0.5, 2, -0.5, 0.5, 2, 0.5, 0.5, -2, -0.5, 0.5, 2, -0.5, 0.5, -2, 0.5, 0.5, -2, -0.5, -0.5, 2, 0.5, -0.5, 2, -0.5, -0.5, -2, 0.5, -0.5, 2, 0.5, -0.5, -2, -0.5, -0.5, -2)
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ondqm"]
+width = 96
+height = 64
+noise = SubResource("FastNoiseLite_ajc1y")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2g3gr"]
+render_priority = 0
+shader = ExtResource("19_y6cpu")
+shader_parameter/color = Color(0.301961, 0.396078, 0.705882, 1)
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_ondqm")
+
+[sub_resource type="Animation" id="Animation_13qot"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:shader_parameter/noise_tex:noise:frequency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0412]
+}
+
+[sub_resource type="Animation" id="Animation_wxed2"]
+resource_name = "WaterSwell"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:surface_material_override/0:shader_parameter/noise_tex:noise:frequency")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0412, 0.043]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oycky"]
+_data = {
+"RESET": SubResource("Animation_13qot"),
+"WaterSwell": SubResource("Animation_wxed2")
+}
 
 [sub_resource type="Resource" id="Resource_ee4yc"]
 script = ExtResource("8_64iu4")
@@ -366,14 +427,15 @@ bg_color = Color(0.752941, 0.580392, 0.45098, 1)
 
 [node name="GameCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866026, 0, -0.866026, 0.5, -3, 30, 20)
+current = true
 fov = 10.0
 script = ExtResource("6_m1i4b")
 camera_offset = 17.165
 follow_speed = 0.043
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.260269, -0.950832, 0.167866, 0.687361, -0.0603651, 0.723803, -0.678082, 0.303768, 0.669276, 0, 4, -1)
-light_energy = 0.684
+transform = Transform3D(-0.260269, -0.950832, 0.167866, 0.83944, -0.136929, 0.525919, -0.477075, 0.277794, 0.833805, 0, 4, 3.5)
+light_energy = 0.7
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_sq8tk")
@@ -393,6 +455,7 @@ shape = SubResource("CylinderShape3D_o3a5p")
 [node name="Sprite3D" type="Sprite3D" parent="Neighborhood/Rowan"]
 pixel_size = 0.0313
 billboard = 1
+shaded = true
 texture_filter = 0
 texture = ExtResource("5_vk42f")
 hframes = 4
@@ -422,49 +485,65 @@ speed = 2.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.5, -1.80418)
 speed = 3.0
 
-[node name="Floor" type="MeshInstance3D" parent="Neighborhood" groups=["floor"]]
-mesh = SubResource("PlaneMesh_xwh0e")
-surface_material_override/0 = SubResource("StandardMaterial3D_g38jy")
+[node name="bush" parent="Neighborhood" instance=ExtResource("20_rck3t")]
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 1, 0, -2)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Neighborhood/Floor"]
+[node name="bush2" parent="Neighborhood" instance=ExtResource("21_ldgfs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Neighborhood/Floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_tyglw")
+[node name="rock" parent="Neighborhood" instance=ExtResource("19_i4ubo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -1)
 
-[node name="Wall2" type="MeshInstance3D" parent="Neighborhood"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.5, 0.5, -4)
-transparency = 0.72
-mesh = SubResource("BoxMesh_nia24")
+[node name="tree" parent="Neighborhood" instance=ExtResource("20_t11w8")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -3, 0, -3)
+
+[node name="pond_edge" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 5)
+
+[node name="pond_edge2" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, 4)
+
+[node name="pond_edge3" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 3.5)
+
+[node name="pond_edge4" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3, 0, 3.5)
+
+[node name="pond_edge5" parent="Neighborhood" instance=ExtResource("23_1g4q2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, 3.5)
+
+[node name="Floor" parent="Neighborhood" instance=ExtResource("13_401ps")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Neighborhood"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
+mesh = SubResource("PlaneMesh_c2mo3")
+surface_material_override/0 = SubResource("ShaderMaterial_uufib")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Neighborhood"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.01, -3.5)
+mesh = SubResource("PlaneMesh_c2mo3")
+surface_material_override/0 = SubResource("ShaderMaterial_uufib")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Neighborhood"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.01, 4)
+mesh = SubResource("PlaneMesh_g6njc")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ji30e")
-script = ExtResource("5_tb50n")
-_size = Vector2(4, 1)
+surface_material_override/0 = SubResource("ShaderMaterial_2g3gr")
 
-[node name="Wall3" type="MeshInstance3D" parent="Neighborhood"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 0.5, 1.75605)
-transparency = 0.72
-mesh = SubResource("BoxMesh_nia24")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ji30e")
-script = ExtResource("5_tb50n")
-_size = Vector2(1, 4)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Neighborhood/MeshInstance3D3"]
+root_node = NodePath("../../MeshInstance3D3")
+autoplay = "WaterSwell"
+libraries = {
+"": SubResource("AnimationLibrary_oycky")
+}
 
-[node name="Wall" type="MeshInstance3D" parent="Neighborhood"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.64286, 0.5, -2.5)
-transparency = 0.72
-mesh = SubResource("BoxMesh_dv6sa")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_ji30e")
-script = ExtResource("5_tb50n")
-_size = Vector2(1, 4)
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Neighborhood/Wall"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Neighborhood/Wall/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_ij2c7")
+[node name="fence_middle" parent="Neighborhood" instance=ExtResource("20_mk4pc")]
+transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0, 0, -3)
+blocks_vertical = true
 
 [node name="Lucy" parent="." instance=ExtResource("5_yg0bw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.5, -2.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
 stats = SubResource("Resource_ee4yc")
 
 [node name="Clock" type="Node" parent="."]

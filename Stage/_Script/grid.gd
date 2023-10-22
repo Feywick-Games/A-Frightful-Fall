@@ -60,7 +60,7 @@ func _on_range_requested(tile_index : int, stats : StatBlock, is_ally : bool) ->
 			mesh_instance.mesh = _empty_mesh
 		
 		add_child(mesh_instance)
-		mesh_instance.global_position = Graph.get_tile_position(id) + Vector3(0,0.01,0)
+		mesh_instance.global_position = Graph.get_tile_position(id) + Vector3(0,0.02,0)
 		_mesh_dict[id] = mesh_instance
 		
 	_highlight_tile(tile_index)

@@ -1,5 +1,5 @@
 class_name Prop
-extends MeshInstance3D
+extends Node3D
 
 @export
 var _size : Vector2
@@ -7,6 +7,10 @@ var _size : Vector2
 var weight : float = INF
 @export
 var passable := false
+@export
+var is_blockade := false
+@export
+var blocks_vertical := false
 
 var rect : Rect2:
 	get:
