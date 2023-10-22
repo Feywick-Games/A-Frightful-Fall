@@ -22,6 +22,7 @@ enum SceneSubState {
 var state : State
 var sub_state : int
 var active_unit : Unit
+var active_unit_moved := false
 
 func _ready() -> void:
 	EventBus.encounter_started.connect(_on_encounter_started)
@@ -40,3 +41,4 @@ func _on_encounter_ended() -> void:
 
 func _on_turn_started(battle_state : BattleSubState) -> void:
 	sub_state = battle_state
+	active_unit_moved = false

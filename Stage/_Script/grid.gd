@@ -35,6 +35,7 @@ func _ready() -> void:
 	EventBus.turn_started.connect(_on_turn_started)
 	EventBus.encounter_started.connect(_on_encounter_started)
 	EventBus.action_panel_toggled.connect(_on_action_panel_toggled)
+	EventBus.action_taken.connect(_on_action_taken)
 	_selection_node = Node3D.new()
 	add_child(_selection_node)
 
@@ -63,8 +64,16 @@ func _on_range_requested(tile_index : int, stats : StatBlock, is_ally : bool) ->
 	_movement_range.clear()
 	_action_range.clear()
 	_empty_range.clear()
-	_movement_range = Graph.get_range_ids(tile_index,stats.movement, is_ally)
-	var range_ids := Graph.get_range_ids(tile_index, stats.movement + stats.reach, is_ally, true) 
+	if not GameState.active_unit_moved:
+		_movement_range = Graph.get_range_ids(tile_index,stats.movement, is_ally)
+	var range_ids : Array[int]
+	
+	if not GameState.active_unit_moved:
+		range_ids = Graph.get_range_ids(tile_index, stats.movement + stats.reach, is_ally, true) 
+	else:
+		range_ids = Graph.get_range_ids(tile_index, stats.reach, is_ally, true)
+		_movement_range.append(tile_index)
+	
 	
 	for id in range_ids:
 		if not id in _movement_range:
@@ -85,6 +94,14 @@ func _on_range_requested(tile_index : int, stats : StatBlock, is_ally : bool) ->
 
 		
 	_highlight_tile(tile_index)
+
+
+func _empty_grid() -> void:
+	for id in _mesh_dict:
+		_mesh_dict[id].mesh = null
+	_movement_range.clear()
+	_action_range.clear()
+	_empty_range.clear()
 
 
 func _highlight_tile(tile : int) -> void:
@@ -118,6 +135,10 @@ func _highlight_tile(tile : int) -> void:
 			EventBus.unit_highlighted.emit(_target.stats)
 		else:
 			EventBus.unit_highlighted.emit(null)
+
+
+func _on_action_taken() -> void:
+	_empty_grid()
 
 
 func _process(_delta: float) -> void:

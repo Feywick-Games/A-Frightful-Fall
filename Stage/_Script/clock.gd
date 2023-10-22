@@ -8,6 +8,11 @@ func _ready() -> void:
 	process_priority = 1
 	EventBus.encounter_started.connect(_on_encounter_started)
 	EventBus.turn_ended.connect(_on_turn_ended)
+	EventBus.unit_died.connect(_on_unit_died)
+
+
+func _on_unit_died(unit : Unit) -> void:
+	_participants.remove_at(_participants.find(unit))
 
 
 func _on_participant_target_position_reached() -> void:

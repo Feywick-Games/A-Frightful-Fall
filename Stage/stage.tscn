@@ -1,21 +1,12 @@
-[gd_scene load_steps=52 format=3 uid="uid://cxkk4wfsjfuut"]
+[gd_scene load_steps=30 format=3 uid="uid://cxkk4wfsjfuut"]
 
 [ext_resource type="Script" path="res://Stage/_Script/clock.gd" id="1_pvpci"]
 [ext_resource type="PackedScene" uid="uid://dwa6pib61kxmd" path="res://Stage/_Scene/grid.tscn" id="2_k5lxv"]
 [ext_resource type="Script" path="res://Stage/_Script/neighborhood.gd" id="2_y3l82"]
-[ext_resource type="Texture2D" uid="uid://ducr4vlggsnbf" path="res://Unit/Ally/_Sprite/wisp.png" id="5_vk42f"]
 [ext_resource type="PackedScene" uid="uid://76j45ew8hl5v" path="res://Unit/Ally/_Scene/lucy.tscn" id="5_yg0bw"]
 [ext_resource type="Script" path="res://Stage/_Script/game_camera.gd" id="6_m1i4b"]
-[ext_resource type="AnimationLibrary" uid="uid://d0tjjhnr8lh2v" path="res://Unit/Ally/_Animation/rowan_animlib.tres" id="6_x8vcy"]
-[ext_resource type="PackedScene" uid="uid://bj0p2hqs8l70a" path="res://Unit/Enemy/_Scene/purple_fairy.tscn" id="7_bf28y"]
-[ext_resource type="Script" path="res://Unit/Enemy/_Script/enemy.gd" id="7_whwhn"]
-[ext_resource type="Script" path="res://Unit/_Script/stat_block.gd" id="8_64iu4"]
-[ext_resource type="PackedScene" uid="uid://snam8eujeu65" path="res://Unit/Enemy/_Scene/red_fairy.tscn" id="8_pg5du"]
-[ext_resource type="PackedScene" uid="uid://wew5txoelujy" path="res://Unit/Enemy/_Scene/green_fairy.tscn" id="9_7q2v8"]
 [ext_resource type="PackedScene" uid="uid://cv7wlmgbd7wd0" path="res://Unit/Enemy/_Scene/firefly.tscn" id="10_inxca"]
-[ext_resource type="PackedScene" uid="uid://bcrj3xlieo20p" path="res://Unit/Enemy/_Scene/owl.tscn" id="12_ilg1k"]
 [ext_resource type="PackedScene" uid="uid://cby4utlqcjp3i" path="res://Environment/_Scene/floor.tscn" id="13_401ps"]
-[ext_resource type="PackedScene" uid="uid://cjv048nnhvgrr" path="res://Unit/Enemy/_Scene/foxfire.tscn" id="14_fji5n"]
 [ext_resource type="PackedScene" uid="uid://doumf0a0fnb30" path="res://Environment/_Scene/rock_square.tscn" id="19_i4ubo"]
 [ext_resource type="Shader" path="res://Environment/_Material/noise.gdshader" id="19_y6cpu"]
 [ext_resource type="PackedScene" uid="uid://bhf2l4bqmqvww" path="res://Environment/_Scene/fence_middle.tscn" id="20_mk4pc"]
@@ -40,301 +31,6 @@ ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.0
 ambient_light_energy = 0.27
 tonemap_mode = 2
-
-[sub_resource type="Resource" id="Resource_t025e"]
-script = ExtResource("8_64iu4")
-name = "Rowan"
-health = 4
-damage = 1
-speed = 2.0
-movement = 4
-reach = 1
-current_health = 3
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_o3a5p"]
-height = 1.0
-radius = 0.25
-
-[sub_resource type="Animation" id="Animation_w725r"]
-resource_name = "IdleDown"
-length = 0.6
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_ntful"]
-resource_name = "IdleLeft"
-length = 0.6
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_dv3bv"]
-resource_name = "IdleRight"
-length = 0.6
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_y0q1e"]
-resource_name = "IdleUp"
-length = 0.6
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_ii8mn"]
-resource_name = "MoveDown"
-length = 0.6
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_wr7hm"]
-resource_name = "MoveLeft"
-length = 0.6
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_168wx"]
-resource_name = "MoveRight"
-length = 0.6
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_sx4bt"]
-resource_name = "MoveUp"
-length = 0.6
-loop_mode = 1
-step = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [0, 1, 2]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_ggbxv"]
-resource_name = "RESET"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite3D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eso8a"]
-_data = {
-"IdleDown": SubResource("Animation_w725r"),
-"IdleLeft": SubResource("Animation_ntful"),
-"IdleRight": SubResource("Animation_dv3bv"),
-"IdleUp": SubResource("Animation_y0q1e"),
-"MoveDown": SubResource("Animation_ii8mn"),
-"MoveLeft": SubResource("Animation_wr7hm"),
-"MoveRight": SubResource("Animation_168wx"),
-"MoveUp": SubResource("Animation_sx4bt"),
-"RESET": SubResource("Animation_ggbxv")
-}
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_c2mo3"]
 size = Vector2(2, 5)
@@ -410,16 +106,6 @@ _data = {
 "WaterSwell": SubResource("Animation_wxed2")
 }
 
-[sub_resource type="Resource" id="Resource_ee4yc"]
-script = ExtResource("8_64iu4")
-name = "Lulu"
-health = 4
-damage = 1
-speed = 2.0
-movement = 3
-reach = 2
-current_health = 4
-
 [node name="Stage" type="Node3D"]
 
 [node name="GameCamera" type="Camera3D" parent="."]
@@ -440,47 +126,7 @@ environment = SubResource("Environment_sq8tk")
 [node name="Neighborhood" type="Node3D" parent="." groups=["demo_neighborhood"]]
 script = ExtResource("2_y3l82")
 
-[node name="Rowan" type="CharacterBody3D" parent="Neighborhood" groups=["demo"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -3)
-script = ExtResource("7_whwhn")
-stats = SubResource("Resource_t025e")
-animlib_name = "Rowan"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Neighborhood/Rowan"]
-shape = SubResource("CylinderShape3D_o3a5p")
-
-[node name="Sprite3D" type="Sprite3D" parent="Neighborhood/Rowan"]
-pixel_size = 0.0313
-billboard = 1
-shaded = true
-texture_filter = 0
-texture = ExtResource("5_vk42f")
-hframes = 4
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Neighborhood/Rowan"]
-autoplay = "IdleDown"
-libraries = {
-"": SubResource("AnimationLibrary_eso8a"),
-"Rowan": ExtResource("6_x8vcy")
-}
-
-[node name="PurpleFairy" parent="Neighborhood" instance=ExtResource("7_bf28y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, -0.5)
-
-[node name="RedFairy" parent="Neighborhood" instance=ExtResource("8_pg5du")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1)
-
-[node name="GreenFairy" parent="Neighborhood" instance=ExtResource("9_7q2v8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.953018, 0.5, 1.21439)
-speed = 2.0
-
 [node name="Firefly" parent="Neighborhood" instance=ExtResource("10_inxca")]
-
-[node name="Owl" parent="Neighborhood" instance=ExtResource("12_ilg1k")]
-
-[node name="Foxfire" parent="Neighborhood" instance=ExtResource("14_fji5n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.5, -1.80418)
-speed = 3.0
 
 [node name="bush" parent="Neighborhood" instance=ExtResource("20_rck3t")]
 transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 1, 0, -2)
@@ -539,13 +185,11 @@ libraries = {
 transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0, 0, -3)
 blocks_vertical = true
 
-[node name="Lucy" parent="." instance=ExtResource("5_yg0bw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
-stats = SubResource("Resource_ee4yc")
-
 [node name="Grid" parent="." instance=ExtResource("2_k5lxv")]
 
 [node name="Clock" type="Node" parent="."]
 script = ExtResource("1_pvpci")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("24_c2n7k")]
+
+[node name="Lucy" parent="." instance=ExtResource("5_yg0bw")]
