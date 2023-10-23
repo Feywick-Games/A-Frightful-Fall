@@ -1,6 +1,9 @@
 class_name Ally
 extends Unit
 
+@export
+var mission_complete_dialogue : String
+
 
 func _ready() -> void:
 	super._ready()
@@ -20,9 +23,7 @@ func _process(delta: float) -> void:
 
 func _on_encounter_started(group : String):
 	super._on_encounter_started(group)
-	tile_index = Graph.get_unoccupied_tile_index(global_position)
-	target_position = Graph.get_tile_position(tile_index)
-	target_position.y = global_position.y
-	moving = true
-	Graph.register_tile(self, -1)
-	target_position_reached.emit()
+	var index : int = Graph.get_unoccupied_tile_index(global_position)
+	tile_index = index
+	Graph.register_tile(self, tile_index, -1)
+	move_to_tile(tile_index)

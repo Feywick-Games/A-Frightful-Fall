@@ -82,7 +82,7 @@ func _on_range_requested(tile_index : int, stats : StatBlock, is_ally : bool) ->
 	var range_ids : Array[int]
 
 
-	var new_range : Array[int]
+	var new_range : Array[int] = []
 	for id in _movement_range:
 		if not Graph.get_tile_occupant(id) or id == tile_index:
 			new_range.append(id)

@@ -1,7 +1,7 @@
 class_name Clock
 extends Node
 
-var _participants : Array[Unit]
+var participants : Array[Unit]
 var _positions_reached : int = 0
 
 func _ready() -> void:
@@ -10,17 +10,18 @@ func _ready() -> void:
 	EventBus.encounter_ended.connect(_on_encounter_ended)
 	EventBus.turn_ended.connect(_on_turn_ended)
 	EventBus.unit_died.connect(_on_unit_died)
+	GameState.clock = self
 
 
 func _on_encounter_ended() -> void:
-	_participants.clear()
+	participants.clear()
 
 
 func _on_unit_died(unit : Unit) -> void:
-	_participants.remove_at(_participants.find(unit))
+	participants.remove_at(participants.find(unit))
 	var completed := true
 	
-	for participant in _participants:
+	for participant in participants:
 		if participant is Enemy:
 			completed = false
 			
@@ -30,7 +31,7 @@ func _on_unit_died(unit : Unit) -> void:
 
 func _on_participant_target_position_reached() -> void:
 	_positions_reached += 1
-	if _positions_reached == len(_participants):
+	if _positions_reached == len(participants):
 		EventBus.all_positions_reached.emit()
 		_positions_reached = 0
 
@@ -39,30 +40,30 @@ func _on_encounter_started(group : String) -> void:
 	_positions_reached = 0
 	var group_nodes := get_tree().get_nodes_in_group("ally") + get_tree().get_nodes_in_group(group) 
 	for node in group_nodes as Array[Unit]:
-		_participants.append(node)
+		participants.append(node)
 		node.target_position_reached.connect(_on_participant_target_position_reached)
-	_participants.sort_custom(_has_highest_speed)
+	participants.sort_custom(_has_highest_speed)
 	
 	await EventBus.all_positions_reached
 	_set_active_unit()
 
 
 func _on_turn_ended() -> void:
-	if _participants.size() > 0:
+	if participants.size() > 0:
 		_set_active_unit()
 
 
 func _set_active_unit() -> void:
-	var active_unit : Unit = _participants.pop_front()
+	var active_unit : Unit = participants.pop_front()
+	GameState.active_unit = active_unit
 	if active_unit is Ally:
 		EventBus.turn_started.emit(GameState.BattleSubState.PLAYER_TURN)
 	elif active_unit is Enemy:
 		EventBus.turn_started.emit(GameState.BattleSubState.ENEMY_TURN)
 	else:
 		printerr("non clarified unit turn in clock")
-	active_unit.start_turn(_participants)
-	_participants.append(active_unit)
-	GameState.active_unit = active_unit
+	active_unit.start_turn(participants)
+	participants.append(active_unit)
 
 
 

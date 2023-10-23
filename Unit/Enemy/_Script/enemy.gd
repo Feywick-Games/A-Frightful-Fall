@@ -12,12 +12,10 @@ func _ready() -> void:
 func _on_encounter_started(group : String):
 	super._on_encounter_started(group)
 	if is_in_group(group):
-		tile_index = Graph.get_unoccupied_tile_index(target_position)
-		target_position = Graph.get_tile_position(tile_index)
-		target_position.y = global_position.y
-		moving = true
-		await target_position_reached
-		Graph.register_tile(self, -1)
+		var index = Graph.get_unoccupied_tile_index(target_position)
+		tile_index = index
+		Graph.register_tile(self, tile_index, -1)
+		move_to_tile(tile_index)
 
 
 func start_turn(participants : Array[Unit]) -> void:

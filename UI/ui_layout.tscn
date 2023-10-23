@@ -139,6 +139,7 @@ theme_override_constants/separation = 6
 [node name="ActionButton" type="Button" parent="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/font_color = Color(0.243137, 0.207843, 0.27451, 1)
 theme_override_colors/font_pressed_color = Color(0.780652, 0.862715, 0.815824, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
@@ -152,9 +153,10 @@ text = "Move"
 alignment = 0
 script = ExtResource("1_rulwc")
 
-[node name="WishButton" type="Button" parent="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="SpecialButton" type="Button" parent="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/font_color = Color(0.243137, 0.207843, 0.27451, 1)
 theme_override_colors/font_pressed_color = Color(0.780652, 0.862715, 0.815824, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
@@ -171,6 +173,7 @@ script = ExtResource("1_rulwc")
 [node name="EndTurnButton" type="Button" parent="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_colors/font_color = Color(0.243137, 0.207843, 0.27451, 1)
 theme_override_colors/font_pressed_color = Color(0.780652, 0.862715, 0.815824, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
@@ -262,4 +265,5 @@ value = 2.0
 show_percentage = false
 
 [connection signal="pressed" from="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/ActionButton" to="FlyAwayMenu" method="_on_action_button_pressed"]
+[connection signal="pressed" from="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/SpecialButton" to="FlyAwayMenu" method="_on_special_button_pressed"]
 [connection signal="pressed" from="FlyAwayMenu/ActionPanel/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/EndTurnButton" to="FlyAwayMenu" method="_on_end_turn_button_pressed"]

@@ -198,9 +198,11 @@ func attack(direction : Vector3) -> void:
 		_animate("Idle", _facing)
 		end_turn()
 
-
 func move_to_tile(tile_id : int) -> void:
 	_path = Graph.get_path_positions3(tile_index, tile_id, is_ally)
+	if len(_path) == 0:
+		_path = [Graph.get_tile_position(tile_index)]
+	
 	_get_next_path_position()
 
 
@@ -209,7 +211,7 @@ func _get_next_path_position() -> void:
 		var old_id = tile_index
 		tile_index = Graph.get_tile_id(target_position)
 		if old_id != tile_index:
-			Graph.register_tile(self, old_id)
+			Graph.register_tile(self, self.tile_index, old_id)
 		moving = false
 		velocity = Vector3.ZERO
 		_animate("Idle", _facing)

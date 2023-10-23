@@ -304,7 +304,7 @@ _data = {
 }
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3alxa"]
-albedo_color = Color(0.960906, 0.392279, 0.254994, 1)
+albedo_color = Color(0.960784, 0.392157, 0.254902, 1)
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_o6por"]

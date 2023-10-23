@@ -200,6 +200,7 @@ script = ExtResource("1_pvpci")
 [node name="CanvasLayer" parent="." instance=ExtResource("24_c2n7k")]
 
 [node name="Lucy" parent="." instance=ExtResource("5_yg0bw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.5, -4.5)
 
 [node name="Firefly" parent="." instance=ExtResource("17_yftmy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.1059, 0.5, -2.02506)

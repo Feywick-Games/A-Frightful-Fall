@@ -89,8 +89,8 @@ func get_unoccupied_tile_index(position : Vector3) -> int:
 	return id
 
 
-func register_tile(unit : Unit, old_index : int) -> void:
-	_unit_registry[unit.tile_index] = unit
+func register_tile(unit : Unit, new_index : int, old_index : int) -> void:
+	_unit_registry[new_index] = unit
 	if old_index != -1:
 		_unit_registry.erase(old_index)
 
@@ -170,7 +170,7 @@ func get_closest_position(pos : Vector3) -> void:
 
 func get_path_positions3(from : int, to : int, is_ally : bool, toggle_all := false) -> PackedVector3Array:
 	_toggle_tiles(toggle_all, is_ally)
-	var path := _graph.get_point_path(from, to) 
+	var path := _graph.get_point_path(from, to)
 	return path.slice(1)
 	
 

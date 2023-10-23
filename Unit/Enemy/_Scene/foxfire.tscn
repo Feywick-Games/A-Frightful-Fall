@@ -104,7 +104,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_awwqg"]
 resource_name = "MoveDown"
-length = 0.8
+length = 0.6
 step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -113,10 +113,10 @@ tracks/0/path = NodePath("Sprite3D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [3, 4, 5, 6]
+"values": [3, 4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_8aich"]
@@ -210,18 +210,6 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_imuad"]
 _data = {
@@ -238,16 +226,16 @@ _data = {
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0keor"]
 albedo_color = Color(0.125536, 0.850996, 0.57644, 1)
-emission_energy_multiplier = 4.59
 billboard_mode = 1
 
 [sub_resource type="QuadMesh" id="QuadMesh_mejjk"]
 material = SubResource("StandardMaterial3D_0keor")
-size = Vector2(0.031, 0.031)
+size = Vector2(0.062, 0.031)
 
 [node name="Foxfire" type="CharacterBody3D" groups=["demo"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 script = ExtResource("1_3xhsd")
+speed = 3.0
 stats = SubResource("Resource_nbvsl")
 animlib_name = "Foxfire"
 no_attack_direction = true
@@ -273,7 +261,7 @@ libraries = {
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="."]
 emitting = false
-amount = 32
+amount = 24
 lifetime = 0.1
 speed_scale = 0.75
 explosiveness = 1.0
@@ -281,14 +269,9 @@ randomness = 0.39
 lifetime_randomness = 0.34
 mesh = SubResource("QuadMesh_mejjk")
 emission_shape = 1
-emission_sphere_radius = 2.0
+emission_sphere_radius = 1.5
 direction = Vector3(0, 0, 0)
 spread = 180.0
 gravity = Vector3(0, 2, 0)
 color = Color(0.125536, 0.850996, 0.57644, 1)
 hue_variation_max = 1.0
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
-light_color = Color(0.215427, 0.847089, 0.497795, 1)
-omni_attenuation = 0.164938
